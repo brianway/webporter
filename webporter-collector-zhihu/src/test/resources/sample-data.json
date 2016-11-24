@@ -1,0 +1,385 @@
+{
+  "paging": {
+    "is_end": false,
+    "next": "https://www.zhihu.com/api/v4/members/hydro-ding/followees?per_page=10&include=data%5B%2A%5D.employments%2Ccover_url%2Callow_message%2Canswer_count%2Carticles_count%2Cfavorite_count%2Cfollower_count%2Cgender%2Cis_followed%2Cmessage_thread_token%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=10&offset=10",
+    "totals": 182,
+    "previous": "https://www.zhihu.com/api/v4/members/hydro-ding/followees?per_page=10&include=data%5B%2A%5D.employments%2Ccover_url%2Callow_message%2Canswer_count%2Carticles_count%2Cfavorite_count%2Cfollower_count%2Cgender%2Cis_followed%2Cmessage_thread_token%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=10&offset=0"
+  },
+  "data": [
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "ca205aabe54d34409caf73e868d9686b",
+      "favorite_count": 0,
+      "headline": "\u7537\u4eba\u4e0b\u53a8 \u73af\u7403\u7f8e\u98df \u672c\u571f\u6539\u9020",
+      "is_org": false,
+      "follower_count": 50538,
+      "employments": [
+        {
+          "company": {
+            "name": "\u9999\u6e2f\u4e2d\u6587\u5927\u5b66(CUHK)",
+            "url": "",
+            "excerpt": "\u9999\u6e2f\u4e2d\u6587\u5927\u5b66 (The Chinese University of Hong Kong)\uff0c\u7b80\u79f0\u6e2f\u4e2d\u6587 (CUHK)\uff0c\u4e8e1963\u5e74\u7531\u65b0\u4e9a\u4e66\u9662\u3001\u8054\u5408\u4e66\u9662\u548c\u5d07\u57fa\u5b66\u9662\u5408\u5e76\u800c\u6210\u3002",
+            "introduction": "\u9999\u6e2f\u4e2d\u6587\u5927\u5b66 (The Chinese University of Hong Kong)\uff0c\u7b80\u79f0\u6e2f\u4e2d\u6587 (CUHK)\uff0c\u4e8e1963\u5e74\u7531\u65b0\u4e9a\u4e66\u9662\u3001\u8054\u5408\u4e66\u9662\u548c\u5d07\u57fa\u5b66\u9662\u5408\u5e76\u800c\u6210\u3002",
+            "avatar_url": "https://pic4.zhimg.com/f78f0e74275ede1497f9f96e56aa20b3_is.png",
+            "type": "topic",
+            "id": "19572928"
+          },
+          "job": {
+            "name": "\u7855\u58eb",
+            "url": "",
+            "excerpt": "",
+            "introduction": null,
+            "avatar_url": "https://pic4.zhimg.com/cf6b126ef_is.jpg",
+            "type": "topic",
+            "id": "19570462"
+          }
+        },
+        {
+          "company": {
+            "name": "MTV",
+            "url": "",
+            "excerpt": "\u5168\u7403\u97f3\u4e50\u7535\u89c6\u53f0\uff0c\u4e5f\u79f0\u97f3\u4e50\u7535\u89c6\u7f51\uff08Music Television\uff0c\u7f29\u5199MTV\uff09\u662f\u4e00\u4e2a\u539f\u672c\u4e13\u95e8\u64ad\u653e\u97f3\u4e50\u5f55\u5f71\u5e26\uff0c\u5c24\u5176\u662f\u6447\u6eda\u4e50\u7684\u6709\u7ebf\u7535\u89c6\u7f51\u3002MTV\u540e\u6765\u4e5f\u64ad\u653e\u89c2\u4f17\u5bf9\u8c61\u9501\u5b9a\u5728\u9752\u5c11\u5e74\u548c\u9752\u5e74\u4e0a\u7684\u8bb8\u591a\u4e0d\u540c\u578b\u6001\u7684\u8282\u76ee\u3002MTV\u57281985\u5e74\u4e4b\u540e\u4e3a\u7ef4\u4e9a\u5eb7\u59c6\u96c6\u56e2\u6240\u62e5\u6709\u3002https://zh.wikipedia.org/wiki/%E9%9F%B3%E6%A8%82%E9%9B%BB%E8%A6%96%E7%B6%B2 ",
+            "introduction": "<b>\u5168\u7403\u97f3\u4e50\u7535\u89c6\u53f0<\/b>\uff0c\u4e5f\u79f0<b>\u97f3\u4e50\u7535\u89c6\u7f51<\/b>\uff08<b>M<\/b>usic <b>T<\/b>ele<b>v<\/b>ision\uff0c\u7f29\u5199<b>MTV<\/b>\uff09\u662f\u4e00\u4e2a\u539f\u672c\u4e13\u95e8\u64ad\u653e\u97f3\u4e50\u5f55\u5f71\u5e26\uff0c\u5c24\u5176\u662f\u6447\u6eda\u4e50\u7684\u6709\u7ebf\u7535\u89c6\u7f51\u3002MTV\u540e\u6765\u4e5f\u64ad\u653e\u89c2\u4f17\u5bf9\u8c61\u9501\u5b9a\u5728\u9752\u5c11\u5e74\u548c\u9752\u5e74\u4e0a\u7684\u8bb8\u591a\u4e0d\u540c\u578b\u6001\u7684\u8282\u76ee\u3002MTV\u57281985\u5e74\u4e4b\u540e\u4e3a\u7ef4\u4e9a\u5eb7\u59c6\u96c6\u56e2\u6240\u62e5\u6709\u3002<a href=\"https://zh.wikipedia.org/wiki/%E9%9F%B3%E6%A8%82%E9%9B%BB%E8%A6%96%E7%B6%B2\">https://zh.wikipedia.org/wiki/%E9%9F%B3%E6%A8%82%E9%9B%BB%E8%A6%96%E7%B6%B2<\/a>",
+            "avatar_url": "https://pic4.zhimg.com/c2737ba371b45215a51ca7e54f3f7fd7_is.png",
+            "type": "topic",
+            "id": "19661740"
+          }
+        },
+        {
+          "company": {
+            "name": "\u4e2d\u56fd\u79fb\u52a8",
+            "url": "",
+            "excerpt": "\u5168\u7403\u6700\u5927\u7684\u79fb\u52a8\u901a\u4fe1\u8fd0\u8425\u5546\u3002",
+            "introduction": "\u5168\u7403\u6700\u5927\u7684\u79fb\u52a8\u901a\u4fe1\u8fd0\u8425\u5546\u3002",
+            "avatar_url": "https://pic1.zhimg.com/3ef0d566c_is.jpg",
+            "type": "topic",
+            "id": "19556691"
+          }
+        }
+      ],
+      "type": "people",
+      "avatar_url_template": "https://pic1.zhimg.com/5c9f3f5154ca9b9f3bdfd2c5328b6028_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 56,
+      "url_token": "zingfood",
+      "allow_message": true,
+      "articles_count": 34,
+      "name": "\u5c0f\u8f9bzing",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "8658887000",
+      "avatar_url": "https://pic1.zhimg.com/5c9f3f5154ca9b9f3bdfd2c5328b6028_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "8c3e96a7717420743def04ca555d2099",
+      "favorite_count": 12,
+      "headline": "CMU AIS/ETIM",
+      "is_org": false,
+      "follower_count": 769,
+      "employments": [
+        {
+          "company": {
+            "name": "Autodesk Reality Capturing",
+            "url": "",
+            "excerpt": "",
+            "introduction": "",
+            "avatar_url": "https://pic1.zhimg.com/e82bab09c_is.jpg",
+            "type": "topic",
+            "id": ""
+          },
+          "job": {
+            "name": "Software Development",
+            "url": "",
+            "excerpt": "",
+            "introduction": null,
+            "avatar_url": "https://pic1.zhimg.com/e82bab09c_is.jpg",
+            "type": "topic",
+            "id": "19550630"
+          }
+        }
+      ],
+      "type": "people",
+      "avatar_url_template": "https://pic1.zhimg.com/d677cc04c_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 54,
+      "url_token": "yu-bing-43",
+      "allow_message": true,
+      "articles_count": 0,
+      "name": "\u8bed\u51b0",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "9622444100",
+      "avatar_url": "https://pic1.zhimg.com/d677cc04c_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "db4c8efb2defbe08b5c54d321334efc5",
+      "favorite_count": 2,
+      "headline": "\u7231\u597d\u6781\u5149\u548c\u51b0\u4e0b\u6f5c\u6c34\uff1b",
+      "is_org": false,
+      "follower_count": 217,
+      "employments": [
+        {
+          "company": {
+            "name": "\u4fa3\u6b27Europair",
+            "url": "",
+            "excerpt": "",
+            "introduction": "",
+            "avatar_url": "https://pic1.zhimg.com/e82bab09c_is.jpg",
+            "type": "topic",
+            "id": ""
+          },
+          "job": {
+            "name": "\u5fae\u4fe1\u516c\u4f17\u8d26\u53f7\u8fd0\u8425",
+            "url": "",
+            "excerpt": "\u5fae\u4fe1\u516c\u53f7\u5e73\u53f0\u8fd0\u8425\u4e2d\u51fa\u73b0\u7684\u95ee\u9898\u3001\u96be\u70b9\u3001\u6210\u529f\u6848\u4f8b\u5206\u4eab\u3002",
+            "introduction": "\u5fae\u4fe1\u516c\u53f7\u5e73\u53f0\u8fd0\u8425\u4e2d\u51fa\u73b0\u7684\u95ee\u9898\u3001\u96be\u70b9\u3001\u6210\u529f\u6848\u4f8b\u5206\u4eab\u3002",
+            "avatar_url": "https://pic1.zhimg.com/fd2579f0c_is.jpg",
+            "type": "topic",
+            "id": "19794233"
+          }
+        },
+        {
+          "company": {
+            "name": "\u5b54\u5b50\u5b66\u9662",
+            "url": "",
+            "excerpt": "\u5b54\u5b50\u5b66\u9662\u662f\u4e2d\u56fd\u653f\u5e9c\u4e3a\u4e86\u5411\u4e16\u754c\u63a8\u5e7f\u6c49\u8bed\uff0c\u589e\u8fdb\u4e16\u754c\u5404\u56fd\u5bf9\u4e2d\u56fd\u7684\u4e86\u89e3\u800c\u8bbe\u7acb\u7684\u5b98\u65b9\u673a\u6784\u3002\u5b66\u9662\u7531\u4e2d\u534e\u4eba\u6c11\u5171\u548c\u56fd\u6559\u80b2\u90e8\u4e0b\u5c5e\u53f8\u5c40\u7ea7\u56fd\u5bb6\u6c49\u8bed\u56fd\u9645\u63a8\u5e7f\u9886\u5bfc\u5c0f\u7ec4\u529e\u516c\u5ba4\u7ba1\u7406\uff0c\u603b\u90e8\u8bbe\u5728\u5317\u4eac\uff0c\u5883\u5916\u7684\u5b54\u5b50\u5b66\u9662\u90fd\u662f\u5176\u5206\u652f\u673a\u6784\u3002",
+            "introduction": "\u5b54\u5b50\u5b66\u9662\u662f\u4e2d\u56fd\u653f\u5e9c\u4e3a\u4e86\u5411\u4e16\u754c\u63a8\u5e7f\u6c49\u8bed\uff0c\u589e\u8fdb\u4e16\u754c\u5404\u56fd\u5bf9\u4e2d\u56fd\u7684\u4e86\u89e3\u800c\u8bbe\u7acb\u7684\u5b98\u65b9\u673a\u6784\u3002\u5b66\u9662\u7531\u4e2d\u534e\u4eba\u6c11\u5171\u548c\u56fd\u6559\u80b2\u90e8\u4e0b\u5c5e\u53f8\u5c40\u7ea7\u56fd\u5bb6\u6c49\u8bed\u56fd\u9645\u63a8\u5e7f\u9886\u5bfc\u5c0f\u7ec4\u529e\u516c\u5ba4\u7ba1\u7406\uff0c\u603b\u90e8\u8bbe\u5728\u5317\u4eac\uff0c\u5883\u5916\u7684\u5b54\u5b50\u5b66\u9662\u90fd\u662f\u5176\u5206\u652f\u673a\u6784\u3002",
+            "avatar_url": "https://pic4.zhimg.com/6ad5a7317_is.jpg",
+            "type": "topic",
+            "id": "19621741"
+          },
+          "job": {
+            "name": "\u516c\u6d3e\u6c49\u8bed\u6559\u5e08\u5fd7\u613f\u8005",
+            "url": "",
+            "excerpt": "",
+            "introduction": null,
+            "avatar_url": "https://pic1.zhimg.com/e82bab09c_is.jpg",
+            "type": "topic",
+            "id": "19901414"
+          }
+        }
+      ],
+      "type": "people",
+      "avatar_url_template": "https://pic2.zhimg.com/8eb7fe73142d77933e1085f48047c8c1_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 18,
+      "url_token": "Muyunio",
+      "allow_message": true,
+      "articles_count": 3,
+      "name": "\u5b89\u6566\u5c3c\u5b50\u6155",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "0706275200",
+      "avatar_url": "https://pic2.zhimg.com/8eb7fe73142d77933e1085f48047c8c1_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "68c23debd98d97ad2ed233395a9fc73c",
+      "favorite_count": 7,
+      "headline": "\u7a0d\u6709\u5e38\u8bc6\u7684\u4eba",
+      "is_org": false,
+      "follower_count": 4035,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic3.zhimg.com/d2beb3276_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 70,
+      "url_token": "dongx5",
+      "allow_message": true,
+      "articles_count": 2,
+      "name": "\u549a\u61c2\u549a\u61c2\u549a",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "3684834100",
+      "avatar_url": "https://pic3.zhimg.com/d2beb3276_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "organization",
+      "is_following": false,
+      "id": "da971e1f564d733611f6a9a51930c4aa",
+      "favorite_count": 0,
+      "headline": "\u6211\u4eec\u79d1\u5b66\u5bb6\u6709\u8bdd\u8bf4",
+      "is_org": true,
+      "follower_count": 89941,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic4.zhimg.com/c1b4a75b500a354b1b6dfa2b7ddfefaf_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 25,
+      "url_token": "zhong-guo-ke-pu-bo-lan",
+      "allow_message": true,
+      "articles_count": 14,
+      "name": "\u4e2d\u56fd\u79d1\u666e\u535a\u89c8",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "7912769400",
+      "avatar_url": "https://pic4.zhimg.com/c1b4a75b500a354b1b6dfa2b7ddfefaf_is.jpg",
+      "gender": -1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "d4959b22f2ab50f4bfc7be9479b921bb",
+      "favorite_count": 3,
+      "headline": "",
+      "is_org": false,
+      "follower_count": 90,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic1.zhimg.com/0357416ddb89da0d862f024651567894_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 8,
+      "url_token": "kate0115",
+      "allow_message": true,
+      "articles_count": 0,
+      "name": "kate0115",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "6487034800",
+      "avatar_url": "https://pic1.zhimg.com/0357416ddb89da0d862f024651567894_is.jpg",
+      "gender": 0
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "7e94b7472fda53b166528d656d1b6a01",
+      "favorite_count": 0,
+      "headline": "",
+      "is_org": false,
+      "follower_count": 3885,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic1.zhimg.com/b0dbb7b970fe48ab8480e202a39d37d8_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 40,
+      "url_token": "fan-fan-11-9",
+      "allow_message": true,
+      "articles_count": 8,
+      "name": "\u996d\u996d",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "6162844100",
+      "avatar_url": "https://pic1.zhimg.com/b0dbb7b970fe48ab8480e202a39d37d8_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "d7477f947da56bad2255f1650c02feb3",
+      "favorite_count": 5,
+      "headline": "\u7f8e\u56fd\u5fc3\u7406\u5b66\u526f\u6559\u6388/\u6570\u636e\u5206\u6790\u5e08/\u513f\u7ae5\u8ba4\u77e5\u80fd\u529b\u57f9\u8bad",
+      "is_org": false,
+      "follower_count": 7266,
+      "employments": [
+        {
+          "company": {
+            "name": "\u5927\u5b66",
+            "url": "",
+            "excerpt": "\u4eba\u7c7b\u63a5\u53d7\u9ad8\u5c42\u6b21\u6559\u80b2\u3001\u8fdb\u884c\u539f\u521b\u6027\u7814\u7a76\u7684\u573a\u6240\u3002 \u73b0\u5728\u7684\u5927\u5b66\u4e00\u822c\u5305\u62ec\u4e00\u4e2a\u80fd\u6388\u4e88\u7855\u58eb\u548c\u535a\u58eb\u5b66\u4f4d\u7684\u7814\u7a76\u751f\u9662\u548c\u6570\u4e2a\u4e13\u4e1a\u5b66\u9662\uff0c\u4ee5\u53ca\u80fd\u6388\u4e88\u5b66\u58eb\u5b66\u4f4d\u7684\u4e00\u4e2a\u672c\u79d1\u751f\u9662\u3002\u5927\u5b66\u8fd8\u5305\u62ec\u9ad8\u7b49\u4e13\u79d1\u5b66\u6821",
+            "introduction": "\u4eba\u7c7b\u63a5\u53d7\u9ad8\u5c42\u6b21\u6559\u80b2\u3001\u8fdb\u884c\u539f\u521b\u6027\u7814\u7a76\u7684\u573a\u6240\u3002<br>\u73b0\u5728\u7684\u5927\u5b66\u4e00\u822c\u5305\u62ec\u4e00\u4e2a\u80fd\u6388\u4e88\u7855\u58eb\u548c\u535a\u58eb\u5b66\u4f4d\u7684\u7814\u7a76\u751f\u9662\u548c\u6570\u4e2a\u4e13\u4e1a\u5b66\u9662\uff0c\u4ee5\u53ca\u80fd\u6388\u4e88\u5b66\u58eb\u5b66\u4f4d\u7684\u4e00\u4e2a\u672c\u79d1\u751f\u9662\u3002\u5927\u5b66\u8fd8\u5305\u62ec\u9ad8\u7b49\u4e13\u79d1\u5b66\u6821",
+            "avatar_url": "https://pic1.zhimg.com/3b441fad0_is.jpg",
+            "type": "topic",
+            "id": "19556353"
+          },
+          "job": {
+            "name": "\u526f\u6559\u6388",
+            "url": "",
+            "excerpt": "",
+            "introduction": null,
+            "avatar_url": "https://pic1.zhimg.com/e82bab09c_is.jpg",
+            "type": "topic",
+            "id": "19743775"
+          }
+        }
+      ],
+      "type": "people",
+      "avatar_url_template": "https://pic2.zhimg.com/6cca0e0b8d5c5385aacce2ba3428c9d5_{size}.png",
+      "cover_url": "",
+      "answer_count": 14,
+      "url_token": "dr-song-41",
+      "allow_message": true,
+      "articles_count": 17,
+      "name": "Dr.Song",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "3854097700",
+      "avatar_url": "https://pic2.zhimg.com/6cca0e0b8d5c5385aacce2ba3428c9d5_is.png",
+      "gender": 0
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "3cb7acfc22f7ffdd1fbdca471daf72c8",
+      "favorite_count": 0,
+      "headline": "\u5929\u5929\u81ea\u5df1\u5410\u69fd\u81ea\u5df1\u57fa\u672c\u529f\u7684\u6570\u5b66phd",
+      "is_org": false,
+      "follower_count": 555,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic3.zhimg.com/a01b7f283bbab3b48f63ba682d218c6a_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 99,
+      "url_token": "pppp-76-22",
+      "allow_message": true,
+      "articles_count": 0,
+      "name": "\u718a\u732b\u7096\u571f\u8c46",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "4598655100",
+      "avatar_url": "https://pic3.zhimg.com/a01b7f283bbab3b48f63ba682d218c6a_is.jpg",
+      "gender": 1
+    },
+    {
+      "is_followed": false,
+      "user_type": "people",
+      "is_following": false,
+      "id": "b0989c4ac16a4dc6939bd04945b5a5db",
+      "favorite_count": 0,
+      "headline": "\u5fc3\u6000\u556e\u96ea\u5927\u5fd7\u613f\uff0c",
+      "is_org": false,
+      "follower_count": 11,
+      "employments": [],
+      "type": "people",
+      "avatar_url_template": "https://pic1.zhimg.com/6524993c8_{size}.jpg",
+      "cover_url": "",
+      "answer_count": 6,
+      "url_token": "boldyoung",
+      "allow_message": true,
+      "articles_count": 0,
+      "name": "BoldYoung",
+      "url": "",
+      "badge": [],
+      "message_thread_token": "0095044000",
+      "avatar_url": "https://pic1.zhimg.com/6524993c8_is.jpg",
+      "gender": 1
+    }
+  ],
+  "_meta": {
+    "paging": {
+      "offset": 0,
+      "next": "/members/hydro-ding/followees?per_page=10&include=data%5B%2A%5D.employments%2Ccover_url%2Callow_message%2Canswer_count%2Carticles_count%2Cfavorite_count%2Cfollower_count%2Cgender%2Cis_followed%2Cmessage_thread_token%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=10&offset=10",
+      "totals": 182,
+      "perPage": 10,
+      "previous": "/members/hydro-ding/followees?per_page=10&include=data%5B%2A%5D.employments%2Ccover_url%2Callow_message%2Canswer_count%2Carticles_count%2Cfavorite_count%2Cfollower_count%2Cgender%2Cis_followed%2Cmessage_thread_token%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=10&offset=0"
+    }
+  }
+}
