@@ -1,11 +1,9 @@
 package com.brianway.webporter.configure;
 
 import com.alibaba.fastjson.JSON;
+import com.brianway.webporter.util.FileHelper;
 import us.codecraft.webmagic.Site;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -28,29 +26,8 @@ public class Configuration {
     }
 
     public static SiteProperty load(String path) {
-        BufferedReader br = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            br = new BufferedReader(new FileReader(path));
-            String tmp;
-            while ((tmp = br.readLine()) != null) {
-                sb.append(tmp);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        String jsonText = sb.toString();
-
+        String jsonText = FileHelper.getRawText(path);
         return JSON.parseObject(jsonText, SiteProperty.class);
-
     }
 
     public static void initSite(Site site, SiteProperty property) {
