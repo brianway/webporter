@@ -46,7 +46,7 @@
     </licenses>
 
     <modules>
-
+        <module>webporter-configure</module>
     </modules>
 
     <dependencyManagement>

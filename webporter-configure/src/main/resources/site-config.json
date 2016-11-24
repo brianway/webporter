@@ -1,0 +1,10 @@
+{
+  "headers": {
+    "AAA": "aaa",
+    "BBB": "bbb"
+  },
+  "cookies": {
+    "CCC": "ccc",
+    "DDD": "ddd"
+  }
+}
