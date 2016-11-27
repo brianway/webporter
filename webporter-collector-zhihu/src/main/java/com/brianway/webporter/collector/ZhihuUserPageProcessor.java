@@ -6,7 +6,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.scheduler.QueueScheduler;
 import us.codecraft.webmagic.scheduler.component.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.selector.Json;
 
@@ -28,7 +27,7 @@ public class ZhihuUserPageProcessor implements PageProcessor {
 
     public void process(Page page) {
         Json json = page.getJson();
-        System.out.println(json);
+        //System.out.println(json);
 
         page.putField("seg", json);
 
@@ -68,8 +67,9 @@ public class ZhihuUserPageProcessor implements PageProcessor {
         String pipelinePath = "/Users/brian/todo/data/webmagic";
         int crawlSize = 1000000;
         Spider.create(new ZhihuUserPageProcessor())
-                .setScheduler(new QueueScheduler()
-                        .setDuplicateRemover(new BloomFilterDuplicateRemover(crawlSize)))
+                .setScheduler(//new QueueScheduler()
+                        new FixedFileCacheQueueScheduler(pipelinePath)
+                                .setDuplicateRemover(new BloomFilterDuplicateRemover(crawlSize)))
                 .addPipeline(new FilePipeline(pipelinePath))
                 .addUrl(generateMemberUrl("hydro-ding"))
                 .thread(20)
