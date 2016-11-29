@@ -16,6 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <junit.version>4.11</junit.version>
         <webmagic.version>0.5.3</webmagic.version>
+        <log4j.version>2.6.2</log4j.version>
     </properties>
 
     <description>
@@ -48,6 +49,7 @@
     <modules>
         <module>webporter-configure</module>
         <module>webporter-collector-zhihu</module>
+        <module>webporter-data-elasticsearch</module>
     </modules>
 
     <dependencyManagement>
@@ -70,6 +72,25 @@
                 <artifactId>webmagic-extension</artifactId>
                 <version>${webmagic.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>transport</artifactId>
+                <version>5.0.1</version>
+            </dependency>
+
+            <!-- log -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
