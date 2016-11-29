@@ -47,7 +47,7 @@
     </licenses>
 
     <modules>
-        <module>webporter-configure</module>
+        <module>webporter-core</module>
         <module>webporter-collector-zhihu</module>
         <module>webporter-data-elasticsearch</module>
     </modules>

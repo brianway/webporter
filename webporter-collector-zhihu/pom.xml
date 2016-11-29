@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.brianway.webporter</groupId>
-            <artifactId>webporter-configure</artifactId>
+            <artifactId>webporter-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

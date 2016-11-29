@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>webporter-configure</artifactId>
+    <artifactId>webporter-core</artifactId>
 
     <dependencies>
         <dependency>
