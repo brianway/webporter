@@ -1,25 +1,28 @@
 # webporter
 
-webporter 一个基于垂直爬虫框架 [webmagic](http://webmagic.io/) 的 Java 爬虫应用，旨在提供一套完整的数据爬取，持久化存储和可视化展示的实践样例。
+webporter 是一个基于垂直爬虫框架 [webmagic](http://webmagic.io/) 的 Java 爬虫应用，旨在提供一套完整的数据爬取，持久化存储和可视化展示的实践样例。
 
 webporter 寓意“我们不生产数据，我们只是互联网的搬运工～”
 
-*如果觉得不错，请先在这个仓库上点个 star 吧*，这也是对我的肯定和鼓励，谢谢了。
+**如果觉得不错，请先在这个仓库上点个 star 吧**，这也是对我的肯定和鼓励，谢谢了。
 
-不定时进行调整和补充，需要关注更新的请 watch、star、fork
+目前只提供了知乎用户数据的爬虫示例。不定时进行调整和补充，需要关注更新的请 watch、star、fork
 
 
 
 
 ## 仓库目录
 
-- [webporter-configure](/webporter-configure):使用 json 配置文件自动化配置模块
+- [webporter-core](/webporter-core):核心基础模块，包括自动配置，抽象逻辑等部分
 - [webporter-collector-zhihu](/webporter-collector-zhihu):知乎用户信息的爬取模块
+- [webporter-data-elasticsearch](/webporter-data-elasticsearch):将数据导入 Elasticsearch 的模块
 
 
 
 
 ## 使用指南
+
+以爬取知乎用户数据为例
 
 ### 数据爬取
 
@@ -43,19 +46,19 @@ webporter 寓意“我们不生产数据，我们只是互联网的搬运工～�
 
 运行 `webporter-collector-zhihu` 模块的 `com.brianway.webporter.collector.ZhihuUserPageProcessor` 即可
 
-3.数据持久化
+### 数据持久化
 
-将数据导入到 ElasticSearch 中，待完善
+将数据导入到 Elasticsearch 中，待完善
 
-4.数据可视化
+### 数据可视化
 
 待完善
 
 
-## TODO 
+## TODO
 
 * [x] 数据爬取，获取知乎用户数据
-* [ ] 数据持久化，将数据导入到 ElasticSearch 中
+* [ ] 数据持久化，将数据导入到 Elasticsearch 中
 * [ ] 可视化展示，通过前端框架对数据进行简单的分析和展示
 
 
@@ -75,6 +78,3 @@ Email: weichuyang@163.com
 ## Lisence
 
 Lisenced under [Apache 2.0 lisence](http://opensource.org/licenses/Apache-2.0)
-
-
-
