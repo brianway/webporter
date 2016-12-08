@@ -10,13 +10,15 @@
     <version>1.0-SNAPSHOT</version>
     <name>webporter-parent</name>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <junit.version>4.11</junit.version>
         <webmagic.version>0.5.3</webmagic.version>
         <log4j.version>2.6.2</log4j.version>
+        <slf4j.version>1.7.21</slf4j.version>
     </properties>
 
     <description>
@@ -65,6 +67,12 @@
                 <groupId>us.codecraft</groupId>
                 <artifactId>webmagic-core</artifactId>
                 <version>${webmagic.version}</version>
+                <!--exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions-->
             </dependency>
 
             <dependency>
@@ -82,15 +90,19 @@
             <!-- log -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-api</artifactId>
+                <artifactId>log4j-to-slf4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-core</artifactId>
-                <version>${log4j.version}</version>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

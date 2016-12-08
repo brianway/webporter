@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 /**
  * Created by brian on 16/11/29.
  */
-public class DataUploader {
+public class ElasticsearchUploader {
     public static void main(String[] args) {
         TransportClient client = null;
         try {
