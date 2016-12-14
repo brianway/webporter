@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by brian on 16/12/8.
@@ -26,6 +27,8 @@ public class BaseAssembler<IN, OUT> {
     protected ExecutorService executorService;
 
     protected CountableThreadPool threadPool;
+
+    protected AtomicLong outItemCount = new AtomicLong(0);
 
     /**
      * 工厂方法
@@ -83,7 +86,7 @@ public class BaseAssembler<IN, OUT> {
         long endTime = System.currentTimeMillis();
         //logger.info("Total time: {}", endTime - startTime);
         System.out.println("Total time: " + (endTime - startTime));
-        System.out.println(((ConsoleOutpipeline) outPipelines.get(0)).getCount());
+        System.out.println("Total outItemCount: " + outItemCount);
     }
 
     protected void processInItem(IN inItem) {
@@ -91,6 +94,7 @@ public class BaseAssembler<IN, OUT> {
         if (outItems == null) {
             return;
         }
+        outItemCount.addAndGet(outItems.size());
         for (OutPipeline<OUT> outPipeline : outPipelines) {
             outPipeline.process(outItems);
         }
