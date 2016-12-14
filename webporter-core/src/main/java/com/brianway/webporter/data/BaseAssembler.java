@@ -2,12 +2,12 @@ package com.brianway.webporter.data;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import us.codecraft.webmagic.thread.CountableThreadPool;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by brian on 16/12/8.
@@ -15,15 +15,17 @@ import java.util.concurrent.Executors;
 public class BaseAssembler<IN, OUT> {
     private static final Logger logger = LoggerFactory.getLogger(BaseAssembler.class);
 
-    protected ExecutorService threadPool;
-
     protected int threadNum = 1;
 
     protected RawInput<IN> rawInput;
 
-    protected List<DataFlow<OUT>> outQueues = new ArrayList<>();
-
     protected DataProcessor<IN, OUT> dataProcessor;
+
+    protected List<OutPipeline<OUT>> outPipelines = new ArrayList<>();
+
+    protected ExecutorService executorService;
+
+    protected CountableThreadPool threadPool;
 
     /**
      * 工厂方法
@@ -42,30 +44,64 @@ public class BaseAssembler<IN, OUT> {
         }
 
         if (threadPool == null || threadPool.isShutdown()) {
-            threadPool = Executors.newFixedThreadPool(threadNum);
+            //threadPool = Executors.newFixedThreadPool(threadNum);
+            threadPool = new CountableThreadPool(threadNum);
+        }
+
+        if (outPipelines.isEmpty()) {
+            outPipelines.add(new ConsoleOutpipeline<>());
         }
     }
 
     public void run() {
+        long startTime = System.currentTimeMillis();
+
         initComponent();
         while (!Thread.currentThread().isInterrupted()) {
             final IN inItem = rawInput.poll();
             if (inItem == null) {
-                break;
-            }
-            final DataFlow<OUT> outQueue = outQueues.get(0);
-            threadPool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        dataProcessor.process(inItem, outQueue);
-                    } catch (Exception e) {
-                        logger.error("error: " + inItem, e);
-                    }
+                if (threadPool.getThreadAlive() == 0) {
+                    break;
                 }
-            });
+            } else {
+                threadPool.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            processInItem(inItem);
+                        } catch (Exception e) {
+                            logger.error("error: " + inItem, e);
+                        } finally {
+
+                        }
+                    }
+                });
+            }
+        }
+        logger.info("Process end");
+        threadPool.shutdown();
+        long endTime = System.currentTimeMillis();
+        //logger.info("Total time: {}", endTime - startTime);
+        System.out.println("Total time: " + (endTime - startTime));
+        System.out.println(((ConsoleOutpipeline) outPipelines.get(0)).getCount());
+    }
+
+    protected void processInItem(IN inItem) {
+        List<OUT> outItems = dataProcessor.process(inItem);
+        if (outItems == null) {
+            return;
+        }
+        for (OutPipeline<OUT> outPipeline : outPipelines) {
+            outPipeline.process(outItems);
         }
     }
+//    protected DataFlow<OUT> route(IN inItem) {
+//        int h;
+//        int hash = (inItem == null) ? 0 : (h = inItem.hashCode()) ^ (h >>> 16);
+//        int index = (outQueues.size() - 1) & hash;
+//        logger.debug("index: {}", index);
+//        return outQueues.get(index);
+//    }
 
     public BaseAssembler<IN, OUT> setRawInput(RawInput<IN> rawInput) {
         this.rawInput = rawInput;
@@ -77,47 +113,35 @@ public class BaseAssembler<IN, OUT> {
         return this;
     }
 
-    public BaseAssembler<IN, OUT> addOutQueue(DataFlow<OUT> outQueue) {
-        this.outQueues.add(outQueue);
-        return this;
-    }
-
     public BaseAssembler<IN, OUT> setDataProcessor(DataProcessor<IN, OUT> dataProcessor) {
         this.dataProcessor = dataProcessor;
         return this;
     }
 
-    public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
-        DataFlow<String> outQueue = new DataFlow<>();
-        BaseAssembler.<File, String>create()
-                .setRawInput(new FileRawInput(folder))
-                .addOutQueue(outQueue)
-                .setDataProcessor(new DemoDataProcessor())
-                .thread(10)
-                .run();
+    public BaseAssembler<IN, OUT> addOutPipeline(OutPipeline<OUT> outPipeline) {
+        this.outPipelines.add(outPipeline);
+        return this;
+    }
 
-        long count = 0;
-        try {
-            String outItem = null;
-            outItem = outQueue.take();
-            while (outItem != null) {
-                if (count % 100000 == 0) {
-                    System.out.println(count);
-                }
-                if (count >= 5600000) {
-                    break;
-                }
-                count++;
-                //System.out.println(count + "  " + outItem);
-                outItem = outQueue.take();
+    public static void main(String[] args) {
+
+        //String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
+        String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
+
+        OutPipeline<String> outPipeline = new ConsoleOutpipeline<>();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                BaseAssembler.<File, String>create()
+                        .setRawInput(new FileRawInput(folder))
+                        .addOutPipeline(outPipeline)
+                        .setDataProcessor(new DemoDataProcessor())
+                        .thread(10)
+                        .run();
             }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        long endTime = System.currentTimeMillis();
-        System.out.println(endTime - startTime);
+        }).start();
+
     }
 }
 
