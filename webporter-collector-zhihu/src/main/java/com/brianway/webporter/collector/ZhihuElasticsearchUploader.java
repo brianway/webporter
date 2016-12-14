@@ -7,6 +7,7 @@ import com.brianway.webporter.data.elasticsearch.Document;
 import com.brianway.webporter.data.elasticsearch.ElasticsearchUploader;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -23,14 +24,18 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         this.type = type;
     }
 
-    public synchronized void upload(Document document) {
+    public void upload(Document document) {
         upload(this.index, this.type, document);
     }
 
     @Override
     public void process(Document outItem) {
-        count.incrementAndGet();
         upload(outItem);
+        count.incrementAndGet();
+    }
+
+    public AtomicLong getCount() {
+        return count;
     }
 
     public static void main(String[] args) {
@@ -40,18 +45,24 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         //String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
         String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
 
-        OutPipeline<Document> outPipeline = new ZhihuElasticsearchUploader(index, type);
+        ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                BaseAssembler.<File, Document>create()
-                        .setRawInput(new FileRawInput(folder))
-                        .addOutPipeline(outPipeline)
-                        .setDataProcessor(new ZhihuUserDataProcessor())
-                        .thread(10)
-                        .run();
-            }
-        }).start();
+        BaseAssembler.<File, Document>create()
+                .setRawInput(new FileRawInput(folder))
+                .addOutPipeline(outPipeline)
+                .setDataProcessor(new ZhihuUserDataProcessor())
+                .thread(10)
+                .run();
+
+        System.out.println("out sent :" + outPipeline.getCount());
+        //outPipeline.bulkProcessor.flush();
+        try {
+            outPipeline.bulkProcessor.awaitClose(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(outPipeline.bulkProcessor);
+
     }
+
 }
