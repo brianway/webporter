@@ -23,4 +23,9 @@ public class Document {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return String.format("id: %s, data: %s", id, content);
+    }
 }
