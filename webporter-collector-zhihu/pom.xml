@@ -32,5 +32,11 @@
             <artifactId>webporter-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.brianway.webporter</groupId>
+            <artifactId>webporter-data-elasticsearch</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>
