@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -30,6 +31,16 @@ public class BaseAssembler<IN, OUT> {
 
     protected AtomicLong outItemCount = new AtomicLong(0);
 
+    protected AtomicInteger stat = new AtomicInteger(STAT_INIT);
+
+    protected final static int STAT_INIT = 0;
+
+    protected final static int STAT_RUNNING = 1;
+
+    protected final static int STAT_STOPPED = 2;
+
+    private final AtomicLong inItemCount = new AtomicLong(0);
+
     /**
      * 工厂方法
      *
@@ -37,8 +48,15 @@ public class BaseAssembler<IN, OUT> {
      * @param <OUT> 输出队列的类型参数
      * @return 组装类的实例
      */
-    public static <IN, OUT> BaseAssembler<IN, OUT> create() {
-        return new BaseAssembler<>();
+    public static <IN, OUT> BaseAssembler<IN, OUT> create(
+            RawInput<IN> rawInput,
+            DataProcessor<IN, OUT> dataProcessor) {
+        return new BaseAssembler<>(rawInput, dataProcessor);
+    }
+
+    public BaseAssembler(RawInput<IN> rawInput, DataProcessor<IN, OUT> dataProcessor) {
+        this.rawInput = rawInput;
+        this.dataProcessor = dataProcessor;
     }
 
     protected void initComponent() {
@@ -47,7 +65,6 @@ public class BaseAssembler<IN, OUT> {
         }
 
         if (threadPool == null || threadPool.isShutdown()) {
-            //threadPool = Executors.newFixedThreadPool(threadNum);
             threadPool = new CountableThreadPool(threadNum);
         }
 
@@ -59,8 +76,9 @@ public class BaseAssembler<IN, OUT> {
     public void run() {
         long startTime = System.currentTimeMillis();
 
+        checkRunningStat();
         initComponent();
-        while (!Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted() && stat.get() == STAT_RUNNING) {
             final IN inItem = rawInput.poll();
             if (inItem == null) {
                 if (threadPool.getThreadAlive() == 0) {
@@ -75,14 +93,17 @@ public class BaseAssembler<IN, OUT> {
                         } catch (Exception e) {
                             logger.error("error: " + inItem, e);
                         } finally {
-
+                            inItemCount.incrementAndGet();
                         }
                     }
                 });
             }
         }
+        stat.set(STAT_STOPPED);
         logger.info("Process end");
-        threadPool.shutdown();
+        // release some resources
+        close();
+
         long endTime = System.currentTimeMillis();
         //logger.info("Total time: {}", endTime - startTime);
         System.out.println("Total time: " + (endTime - startTime));
@@ -94,22 +115,48 @@ public class BaseAssembler<IN, OUT> {
         if (outItems == null) {
             return;
         }
+
         outItemCount.addAndGet(outItems.size());
+
         for (OutPipeline<OUT> outPipeline : outPipelines) {
             outPipeline.process(outItems);
         }
     }
-//    protected DataFlow<OUT> route(IN inItem) {
-//        int h;
-//        int hash = (inItem == null) ? 0 : (h = inItem.hashCode()) ^ (h >>> 16);
-//        int index = (outQueues.size() - 1) & hash;
-//        logger.debug("index: {}", index);
-//        return outQueues.get(index);
-//    }
 
-    public BaseAssembler<IN, OUT> setRawInput(RawInput<IN> rawInput) {
-        this.rawInput = rawInput;
-        return this;
+    private void checkRunningStat() {
+        while (true) {
+            int statNow = stat.get();
+            if (statNow == STAT_RUNNING) {
+                throw new IllegalStateException("Assembler is already running!");
+            }
+            if (stat.compareAndSet(statNow, STAT_RUNNING)) {
+                break;
+            }
+        }
+    }
+
+    protected void checkIfRunning() {
+        if (stat.get() == STAT_RUNNING) {
+            throw new IllegalStateException("Assembler is already running!");
+        }
+    }
+
+    public void close() {
+        destroyEach(dataProcessor);
+        for (OutPipeline<OUT> outPipeline : outPipelines) {
+            destroyEach(outPipeline);
+        }
+        threadPool.shutdown();
+    }
+
+    private void destroyEach(Object object) {
+        if (object instanceof AutoCloseable) {
+            try {
+                ((AutoCloseable) object).close();
+            } catch (Exception e) {
+                logger.warn("destroyEach: {}", e);
+            }
+        }
     }
 
     public BaseAssembler<IN, OUT> thread(int threadNum) {
@@ -117,12 +164,14 @@ public class BaseAssembler<IN, OUT> {
         return this;
     }
 
-    public BaseAssembler<IN, OUT> setDataProcessor(DataProcessor<IN, OUT> dataProcessor) {
-        this.dataProcessor = dataProcessor;
+    public BaseAssembler<IN, OUT> setOutPipelines(List<OutPipeline<OUT>> outPipelines) {
+        checkIfRunning();
+        this.outPipelines = outPipelines;
         return this;
     }
 
     public BaseAssembler<IN, OUT> addOutPipeline(OutPipeline<OUT> outPipeline) {
+        checkIfRunning();
         this.outPipelines.add(outPipeline);
         return this;
     }
@@ -137,10 +186,9 @@ public class BaseAssembler<IN, OUT> {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                BaseAssembler.<File, String>create()
-                        .setRawInput(new FileRawInput(folder))
+                BaseAssembler.<File, String>create(
+                        new FileRawInput(folder), new DemoDataProcessor())
                         .addOutPipeline(outPipeline)
-                        .setDataProcessor(new DemoDataProcessor())
                         .thread(10)
                         .run();
             }

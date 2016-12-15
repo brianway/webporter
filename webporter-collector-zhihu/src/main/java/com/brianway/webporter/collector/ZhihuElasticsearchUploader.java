@@ -13,9 +13,13 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by brian on 16/12/14.
  */
-public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements OutPipeline<Document> {
+public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements OutPipeline<Document>, AutoCloseable {
+
     private String index;
     private String type;
+
+    private long awaitTime = 1;
+    private TimeUnit timeUnit = TimeUnit.MINUTES;
 
     private AtomicLong count = new AtomicLong(0);
 
@@ -38,29 +42,31 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         return count;
     }
 
+    @Override
+    public void close() throws InterruptedException {
+        bulkProcessor.awaitClose(awaitTime, timeUnit);
+    }
+
+    public void setTimeout(long awaitTime, TimeUnit timeUnit) {
+        this.awaitTime = awaitTime;
+        this.timeUnit = timeUnit;
+    }
+
     public static void main(String[] args) {
         String index = "zhihu";
         String type = "user";
-        //ZhihuElasticsearchUploader uploader = new ZhihuElasticsearchUploader(index,type);
+
         //String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
         String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
 
         ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
 
-        BaseAssembler.<File, Document>create()
-                .setRawInput(new FileRawInput(folder))
+        BaseAssembler.<File, Document>create(new FileRawInput(folder), new ZhihuUserDataProcessor())
                 .addOutPipeline(outPipeline)
-                .setDataProcessor(new ZhihuUserDataProcessor())
                 .thread(10)
                 .run();
 
         System.out.println("out sent :" + outPipeline.getCount());
-        //outPipeline.bulkProcessor.flush();
-        try {
-            outPipeline.bulkProcessor.awaitClose(1, TimeUnit.MINUTES);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         System.out.println(outPipeline.bulkProcessor);
 
     }
