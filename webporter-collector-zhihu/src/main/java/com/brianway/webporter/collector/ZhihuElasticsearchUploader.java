@@ -44,7 +44,7 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
 
     @Override
     public void close() throws InterruptedException {
-        bulkProcessor.awaitClose(awaitTime, timeUnit);
+        awaitClose(awaitTime, timeUnit);
     }
 
     public void setTimeout(long awaitTime, TimeUnit timeUnit) {
@@ -67,7 +67,7 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
                 .run();
 
         System.out.println("out sent :" + outPipeline.getCount());
-        System.out.println(outPipeline.bulkProcessor);
+        System.out.println(outPipeline.getBulkProcessor());
 
     }
 

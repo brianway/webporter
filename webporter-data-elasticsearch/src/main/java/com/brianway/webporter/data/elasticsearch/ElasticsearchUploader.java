@@ -17,16 +17,18 @@ import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by brian on 16/11/29.
  */
 public class ElasticsearchUploader {
-    protected static Logger logger = LoggerFactory.getLogger(ElasticsearchUploader.class);
+    private static Logger logger = LoggerFactory.getLogger(ElasticsearchUploader.class);
 
     protected TransportClient client;
-    protected BulkProcessor bulkProcessor;
     protected BulkProcessor.Listener listener;
+
+    private BulkProcessor bulkProcessor;
 
     public ElasticsearchUploader() {
         init();
@@ -75,6 +77,18 @@ public class ElasticsearchUploader {
     public void upload(String index, String type, Document doc) {
         bulkProcessor.add(new IndexRequest(index, type, doc.getId())
                 .source(doc.getContent()));
+    }
+
+    public void awaitClose(long awaitTime, TimeUnit timeUnit) throws InterruptedException {
+        bulkProcessor.awaitClose(awaitTime, timeUnit);
+    }
+
+    public void closeNow() {
+        bulkProcessor.close();
+    }
+
+    public BulkProcessor getBulkProcessor() {
+        return bulkProcessor;
     }
 
     public static void main(String[] args) {
