@@ -1,6 +1,7 @@
 package com.brianway.webporter.collector;
 
 import com.brianway.webporter.data.DataProcessor;
+import com.brianway.webporter.data.HashSetDuplicateRemover;
 import com.brianway.webporter.data.elasticsearch.Document;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,6 +21,8 @@ import java.util.List;
 public class ZhihuUserDataProcessor extends DataProcessor<File, Document> {
     private static final Logger logger = LoggerFactory.getLogger(ZhihuUserDataProcessor.class);
 
+    private HashSetDuplicateRemover<String> duplicateRemover = new HashSetDuplicateRemover<>();
+
     @Override
     protected List<Document> process(File inItem) {
         String s = getUsers(inItem);
@@ -31,7 +34,10 @@ public class ZhihuUserDataProcessor extends DataProcessor<File, Document> {
             List<String> ids = json.jsonPath("$.data[*].id").all();
             int i = 0;
             for (String id : ids) {
-                documents.add(new Document(id, users.get(i++)));
+                if (!duplicateRemover.isDuplicate(id)) {
+                    documents.add(new Document(id, users.get(i)));
+                }
+                i++;
             }
         }
         return documents;

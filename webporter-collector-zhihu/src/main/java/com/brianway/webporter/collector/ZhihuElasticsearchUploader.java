@@ -60,6 +60,7 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
 
         ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
+        outPipeline.setTimeout(5, TimeUnit.MINUTES);
 
         BaseAssembler.<File, Document>create(new FileRawInput(folder), new ZhihuUserDataProcessor())
                 .addOutPipeline(outPipeline)

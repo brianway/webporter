@@ -100,19 +100,19 @@ public class BaseAssembler<IN, OUT> {
             }
         }
         stat.set(STAT_STOPPED);
-        logger.info("Process end");
+        long endTime = System.currentTimeMillis();
+        logger.info("Process end. spent {} ms", (endTime - startTime));
         // release some resources
         close();
 
-        long endTime = System.currentTimeMillis();
-        //logger.info("Total time: {}", endTime - startTime);
-        System.out.println("Total time: " + (endTime - startTime));
-        System.out.println("Total outItemCount: " + outItemCount);
+        endTime = System.currentTimeMillis();
+        logger.info("Total time: {}", endTime - startTime);
+        logger.info("Total outItemCount: {}", outItemCount);
     }
 
     protected void processInItem(IN inItem) {
         List<OUT> outItems = dataProcessor.process(inItem);
-        if (outItems == null) {
+        if (outItems == null || outItems.isEmpty()) {
             return;
         }
 
