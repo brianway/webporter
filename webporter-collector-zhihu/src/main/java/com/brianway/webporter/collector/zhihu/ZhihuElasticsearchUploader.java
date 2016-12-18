@@ -62,7 +62,7 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
         outPipeline.setTimeout(5, TimeUnit.MINUTES);
 
-        BaseAssembler.<File, Document>create(new FileRawInput(folder), new ZhihuUserDataProcessor())
+        BaseAssembler.<File, Document>create(new FileRawInput(folder), new ZhihuFolloweeDataProcessor())
                 .addOutPipeline(outPipeline)
                 .thread(10)
                 .run();

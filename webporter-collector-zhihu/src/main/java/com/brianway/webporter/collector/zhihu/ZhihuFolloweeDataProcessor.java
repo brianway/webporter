@@ -18,8 +18,8 @@ import java.util.List;
 /**
  * Created by brian on 16/12/14.
  */
-public class ZhihuUserDataProcessor extends DataProcessor<File, Document> {
-    private static final Logger logger = LoggerFactory.getLogger(ZhihuUserDataProcessor.class);
+public class ZhihuFolloweeDataProcessor extends DataProcessor<File, Document> {
+    private static final Logger logger = LoggerFactory.getLogger(ZhihuFolloweeDataProcessor.class);
 
     private HashSetDuplicateRemover<String> duplicateRemover = new HashSetDuplicateRemover<>();
 

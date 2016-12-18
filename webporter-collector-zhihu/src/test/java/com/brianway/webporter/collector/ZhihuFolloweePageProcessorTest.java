@@ -14,7 +14,7 @@ import java.util.List;
  * 参考文档 http://webmagic.io/docs/zh/posts/chx-cases/js-render-page.html
  * 两种写法都可以,后一种更简洁
  */
-public class ZhihuUserPageProcessorTest {
+public class ZhihuFolloweePageProcessorTest {
 
     @Test
     public void testExtractJson() {

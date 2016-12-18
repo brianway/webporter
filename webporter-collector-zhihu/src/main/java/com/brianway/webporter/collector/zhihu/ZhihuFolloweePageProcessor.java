@@ -17,7 +17,7 @@ import java.util.List;
  *
  * 爬取知乎用户
  */
-public class ZhihuUserPageProcessor implements PageProcessor {
+public class ZhihuFolloweePageProcessor implements PageProcessor {
 
     private static String URL_TEMPLATE = "https://www.zhihu.com/api/v4/members/%s/followees?";
 
@@ -66,7 +66,7 @@ public class ZhihuUserPageProcessor implements PageProcessor {
     public static void main(String[] args) {
         String pipelinePath = "/Users/brian/todo/data/webmagic";
         int crawlSize = 1000000;
-        Spider.create(new ZhihuUserPageProcessor())
+        Spider.create(new ZhihuFolloweePageProcessor())
                 .setScheduler(//new QueueScheduler()
                         new FixedFileCacheQueueScheduler(pipelinePath)
                                 .setDuplicateRemover(new BloomFilterDuplicateRemover(crawlSize)))
