@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector;
+package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.configure.Configuration;
 import us.codecraft.webmagic.Page;

@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector;
+package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.data.BaseAssembler;
 import com.brianway.webporter.data.FileRawInput;

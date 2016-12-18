@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector;
+package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.HashSetDuplicateRemover;

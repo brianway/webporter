@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector;
+package com.brianway.webporter.collector.zhihu;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
