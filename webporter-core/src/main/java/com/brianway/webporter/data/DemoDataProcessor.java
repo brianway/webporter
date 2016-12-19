@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by brian on 16/12/6.
  */
-public class DemoDataProcessor extends DataProcessor<File, String> {
+public class DemoDataProcessor implements DataProcessor<File, String> {
     private static final Logger logger = LoggerFactory.getLogger(DemoDataProcessor.class);
 
     @Override
-    protected List<String> process(File inItem) {
+    public List<String> process(File inItem) {
         List<String> outItems = null;
 
         try {

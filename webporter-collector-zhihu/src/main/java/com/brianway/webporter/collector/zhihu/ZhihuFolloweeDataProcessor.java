@@ -18,13 +18,13 @@ import java.util.List;
 /**
  * Created by brian on 16/12/14.
  */
-public class ZhihuFolloweeDataProcessor extends DataProcessor<File, Document> {
+public class ZhihuFolloweeDataProcessor implements DataProcessor<File, Document> {
     private static final Logger logger = LoggerFactory.getLogger(ZhihuFolloweeDataProcessor.class);
 
     private HashSetDuplicateRemover<String> duplicateRemover = new HashSetDuplicateRemover<>();
 
     @Override
-    protected List<Document> process(File inItem) {
+    public List<Document> process(File inItem) {
         String s = getUsers(inItem);
         List<Document> documents = null;
         if (!StringUtils.isEmpty(s)) {

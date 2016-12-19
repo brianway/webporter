@@ -24,13 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by brian on 16/12/18.
  */
-public class ZhihuMemberUrlTokenGetter extends DataProcessor<File, String> {
+public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
     private static final Logger logger = LoggerFactory.getLogger(ZhihuMemberUrlTokenGetter.class);
 
     private Set<String> urlTokens = Sets.newSetFromMap(new ConcurrentHashMap<>());
 
     @Override
-    protected List<String> process(File inItem) {
+    public List<String> process(File inItem) {
         String s = getUsers(inItem);
         if (!StringUtils.isEmpty(s)) {
             Json json = new Json(s);
