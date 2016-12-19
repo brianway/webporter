@@ -24,8 +24,8 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by brian on 16/12/18.
  */
-public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
-    private static final Logger logger = LoggerFactory.getLogger(ZhihuMemberUrlTokenGetter.class);
+public class MemberURLTokenGenerator implements DataProcessor<File, String> {
+    private static final Logger logger = LoggerFactory.getLogger(MemberURLTokenGenerator.class);
 
     private Set<String> urlTokens = Sets.newSetFromMap(new ConcurrentHashMap<>());
 
@@ -58,8 +58,8 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
         save(DEFAULT_PATH);
     }
 
-    public Set<String> getUrlTokens() {
-        return getUrlTokens(DEFAULT_PATH);
+    public Set<String> getURLTokens() {
+        return getURLTokens(DEFAULT_PATH);
     }
 
     public void save(String path) {
@@ -77,7 +77,7 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
 
     }
 
-    public Set<String> getUrlTokens(String path) {
+    public Set<String> getURLTokens(String path) {
         Set<String> urlTokens = new HashSet<>();
         BufferedReader in;
         try {
@@ -106,9 +106,9 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
         ZhihuConfiguration configuration = new ZhihuConfiguration();
         String followeeFolder = configuration.getFolloweeDataPath();
 
-        ZhihuMemberUrlTokenGetter getter = new ZhihuMemberUrlTokenGetter();
-        getter.extractTokens(followeeFolder);
-        getter.save();
+        MemberURLTokenGenerator generator = new MemberURLTokenGenerator();
+        generator.extractTokens(followeeFolder);
+        generator.save();
     }
 
 }

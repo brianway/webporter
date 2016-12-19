@@ -1,7 +1,7 @@
 package com.brianway.webporter.collector.zhihu.download;
 
 import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
-import com.brianway.webporter.collector.zhihu.ZhihuMemberUrlTokenGetter;
+import com.brianway.webporter.collector.zhihu.MemberURLTokenGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
@@ -55,8 +55,8 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
                 .addPipeline(new ZhihuMemberPipeline(pipelinePath))
                 .thread(20);
 
-        ZhihuMemberUrlTokenGetter getter = new ZhihuMemberUrlTokenGetter();
-        for (String token : getter.getUrlTokens()) {
+        MemberURLTokenGenerator getter = new MemberURLTokenGenerator();
+        for (String token : getter.getURLTokens()) {
             spider.addUrl(generateMemberUrl(token));
         }
 
