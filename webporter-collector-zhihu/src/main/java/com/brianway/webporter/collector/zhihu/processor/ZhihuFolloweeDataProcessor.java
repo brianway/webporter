@@ -1,5 +1,6 @@
-package com.brianway.webporter.collector.zhihu;
+package com.brianway.webporter.collector.zhihu.processor;
 
+import com.brianway.webporter.collector.zhihu.SegmentReader;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.HashSetDuplicateRemover;
 import com.brianway.webporter.data.elasticsearch.Document;

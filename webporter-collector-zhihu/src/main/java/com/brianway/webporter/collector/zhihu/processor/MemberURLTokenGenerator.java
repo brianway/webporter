@@ -1,5 +1,7 @@
-package com.brianway.webporter.collector.zhihu;
+package com.brianway.webporter.collector.zhihu.processor;
 
+import com.brianway.webporter.collector.zhihu.SegmentReader;
+import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
 import com.brianway.webporter.data.BaseAssembler;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.FileRawInput;

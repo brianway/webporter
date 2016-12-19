@@ -1,6 +1,6 @@
 package com.brianway.webporter.collector;
 
-import com.brianway.webporter.collector.zhihu.ZhihuMemberDataProcessor;
+import com.brianway.webporter.collector.zhihu.processor.ZhihuMemberDataProcessor;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.elasticsearch.Document;
 import org.junit.Assert;
