@@ -18,7 +18,7 @@ public class ZhihuFolloweePageProcessorTest {
 
     @Test
     public void testExtractJson() {
-        String dataFile = this.getClass().getResource("/").getPath() + "/sample-data.json";
+        String dataFile = this.getClass().getResource("/").getPath() + "/followee.json";
         String jsonText = FileHelper.getRawText(dataFile);
         Json json = new Json(jsonText);
 

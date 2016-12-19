@@ -1,6 +1,7 @@
 package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.data.BaseAssembler;
+import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.FileRawInput;
 import com.brianway.webporter.data.OutPipeline;
 import com.brianway.webporter.data.elasticsearch.Document;
@@ -52,24 +53,50 @@ public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements
         this.timeUnit = timeUnit;
     }
 
-    public static void main(String[] args) {
+    public static void uploadFollowees() {
         String index = "zhihu";
-        String type = "user";
+        String type = "followee";
+        ZhihuConfiguration configuration = new ZhihuConfiguration();
 
-        //String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
-        String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
+        String folder = configuration.getFolloweeDataPath();
+        DataProcessor<File, Document> processor = new ZhihuFolloweeDataProcessor();
 
         ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
         outPipeline.setTimeout(5, TimeUnit.MINUTES);
 
-        BaseAssembler.<File, Document>create(new FileRawInput(folder), new ZhihuFolloweeDataProcessor())
+        BaseAssembler.create(new FileRawInput(folder), processor)
                 .addOutPipeline(outPipeline)
                 .thread(10)
                 .run();
 
         System.out.println("out sent :" + outPipeline.getCount());
         System.out.println(outPipeline.getBulkProcessor());
+    }
 
+    public static void uploadMembers() {
+        String index = "zhihu";
+        String type = "member";
+        ZhihuConfiguration configuration = new ZhihuConfiguration();
+
+        String folder = configuration.getMemberDataPath();
+        DataProcessor<File, Document> processor = new ZhihuMemberDataProcessor();
+
+        ZhihuElasticsearchUploader outPipeline = new ZhihuElasticsearchUploader(index, type);
+        outPipeline.setTimeout(5, TimeUnit.MINUTES);
+
+        BaseAssembler.create(new FileRawInput(folder), processor)
+                .addOutPipeline(outPipeline)
+                .thread(10)
+                .run();
+
+        System.out.println("out sent :" + outPipeline.getCount());
+        System.out.println(outPipeline.getBulkProcessor());
+    }
+
+    public static void main(String[] args) {
+
+        //uploadFollowees();
+        uploadMembers();
     }
 
 }
