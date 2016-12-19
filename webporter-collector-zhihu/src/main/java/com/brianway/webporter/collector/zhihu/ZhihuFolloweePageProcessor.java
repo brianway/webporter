@@ -19,14 +19,14 @@ import java.util.List;
 /**
  * Created by brian on 16/11/24.
  *
- * 爬取知乎用户
+ * 爬取知乎用户的关注者
  */
 public class ZhihuFolloweePageProcessor implements PageProcessor {
     private static Logger logger = LoggerFactory.getLogger(ZhihuFolloweePageProcessor.class);
 
-    private static String URL_TEMPLATE = "https://www.zhihu.com/api/v4/members/%s/followees?";
+    private static String URL_TEMPLATE = "https://www.zhihu.com/api/v4/members/%s/followees";
 
-    private static String QUERY_PARAMS = "per_page=20&include=data%5B%2A%5D.employments%2Ccover_url%2Callow_message%2Canswer_count%2Carticles_count%2Cfavorite_count%2Cfollower_count%2Cgender%2Cis_followed%2Cmessage_thread_token%2Cis_following%2Cbadge%5B%3F%28type%3Dbest_answerer%29%5D.topics&limit=0&offset=20";
+    private static String QUERY_PARAMS = "?include=data%5B*%5D.url_token&offset=0&per_page=30&limit=30";
 
     private Site site = getConfigured();
 
