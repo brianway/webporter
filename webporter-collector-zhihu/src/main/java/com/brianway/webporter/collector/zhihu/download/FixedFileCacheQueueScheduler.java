@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector.zhihu;
+package com.brianway.webporter.collector.zhihu.download;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -157,7 +157,7 @@ public class FixedFileCacheQueueScheduler extends DuplicateRemovedScheduler impl
         try {
             fileCursorReader = new BufferedReader(new FileReader(getFileName(fileCursor)));
             String line;
-            //read the last number
+            //readFollowees the last number
             while ((line = fileCursorReader.readLine()) != null) {
                 cursor = new AtomicInteger(NumberUtils.toInt(line));
             }

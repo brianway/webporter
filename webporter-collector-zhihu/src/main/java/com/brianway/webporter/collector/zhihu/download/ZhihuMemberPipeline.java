@@ -1,4 +1,4 @@
-package com.brianway.webporter.collector.zhihu;
+package com.brianway.webporter.collector.zhihu.download;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;

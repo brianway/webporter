@@ -36,7 +36,7 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
 
     @Override
     public List<String> process(File inItem) {
-        String s = getUsers(inItem);
+        String s = SegmentReader.readFollowees(inItem);
         if (!StringUtils.isEmpty(s)) {
             Json json = new Json(s);
             List<String> tokens = json.jsonPath("$.data[*].url_token").all();
@@ -72,14 +72,14 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
 
             printWriter.close();
         } catch (IOException e) {
-            logger.warn("write file error", e);
+            logger.error("write file error", e);
         }
 
     }
 
     public Set<String> getUrlTokens(String path) {
         Set<String> urlTokens = new HashSet<>();
-        BufferedReader in = null;
+        BufferedReader in;
         try {
             in = new BufferedReader(
                     new FileReader(new File(path))
@@ -93,30 +93,10 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
             in.close();
             return urlTokens;
         } catch (IOException e) {
-            logger.error("IOException when read user data from file : {}", e);
+            logger.error("IOException when readFollowees user data from file : {}", e);
             return null;
         }
 
-    }
-
-    private String getUsers(File inItem) {
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(
-                    new FileReader(inItem)
-            );
-            String s;
-            in.readLine();//pass first line
-            s = in.readLine();
-            if (!StringUtils.isEmpty(s)) {
-                s = s.substring(s.indexOf("{"));
-            }
-            in.close();
-            return s;
-        } catch (IOException e) {
-            logger.error("IOException when read user data from file : {}", e);
-            return null;
-        }
     }
 
     /**

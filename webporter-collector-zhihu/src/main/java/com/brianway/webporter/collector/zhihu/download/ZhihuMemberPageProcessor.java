@@ -1,5 +1,7 @@
-package com.brianway.webporter.collector.zhihu;
+package com.brianway.webporter.collector.zhihu.download;
 
+import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
+import com.brianway.webporter.collector.zhihu.ZhihuMemberUrlTokenGetter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;

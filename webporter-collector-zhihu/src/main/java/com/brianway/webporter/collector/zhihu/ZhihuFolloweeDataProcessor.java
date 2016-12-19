@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.selector.Json;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +22,9 @@ public class ZhihuFolloweeDataProcessor implements DataProcessor<File, Document>
 
     @Override
     public List<Document> process(File inItem) {
-        String s = getUsers(inItem);
+        String s = SegmentReader.readFollowees(inItem);
         List<Document> documents = null;
+
         if (!StringUtils.isEmpty(s)) {
             documents = new ArrayList<>(20);
             Json json = new Json(s);
@@ -43,24 +41,4 @@ public class ZhihuFolloweeDataProcessor implements DataProcessor<File, Document>
         return documents;
     }
 
-    private String getUsers(File inItem) {
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(
-                    new FileReader(inItem)
-            );
-            String s;
-            in.readLine();//pass first line
-            s = in.readLine();
-            if (!StringUtils.isEmpty(s)) {
-                s = s.substring(s.indexOf("{"));
-            }
-            in.close();
-            return s;
-        } catch (IOException e) {
-            logger.error("IOException when read user data from file : {}", e);
-            return null;
-        }
-
-    }
 }
