@@ -1,6 +1,8 @@
 package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.configure.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -9,6 +11,8 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.component.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.selector.Json;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,7 @@ import java.util.List;
  * 爬取知乎用户
  */
 public class ZhihuFolloweePageProcessor implements PageProcessor {
+    private static Logger logger = LoggerFactory.getLogger(ZhihuFolloweePageProcessor.class);
 
     private static String URL_TEMPLATE = "https://www.zhihu.com/api/v4/members/%s/followees?";
 
@@ -52,7 +57,13 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
     }
 
     private static String generateMemberUrl(String urlToken) {
-        return String.format(URL_TEMPLATE, urlToken) + QUERY_PARAMS;
+        String encoded = null;
+        try {
+            encoded = URLEncoder.encode(urlToken, "UTF-8").replace("+", "%20");
+        } catch (UnsupportedEncodingException e) {
+            logger.error("URLEncode error {}", e);
+        }
+        return String.format(URL_TEMPLATE, encoded) + QUERY_PARAMS;
     }
 
     private static List<String> generateMemberUrls(List<String> urlTokens) {
@@ -64,7 +75,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        String pipelinePath = "/Users/brian/todo/data/webmagic";
+        String pipelinePath = "/Users/brian/todo/data/webmagic/followee";
         int crawlSize = 1000000;
         Spider.create(new ZhihuFolloweePageProcessor())
                 .setScheduler(//new QueueScheduler()
