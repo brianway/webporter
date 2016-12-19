@@ -29,6 +29,11 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
 
     private Set<String> urlTokens = Sets.newSetFromMap(new ConcurrentHashMap<>());
 
+    public final static String URL_TOKEN_FILENAME = "url_tokens";
+
+    public final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath()
+            + URL_TOKEN_FILENAME;
+
     @Override
     public List<String> process(File inItem) {
         String s = getUsers(inItem);
@@ -47,6 +52,14 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
                 .thread(10)
                 .run();
         return urlTokens;
+    }
+
+    public void save() {
+        save(DEFAULT_PATH);
+    }
+
+    public Set<String> getUrlTokens() {
+        return getUrlTokens(DEFAULT_PATH);
     }
 
     public void save(String path) {
@@ -106,12 +119,16 @@ public class ZhihuMemberUrlTokenGetter implements DataProcessor<File, String> {
         }
     }
 
+    /**
+     * 从下载数据中提取 url_token,每行一个,保存到文件
+     */
     public static void main(String[] args) {
-        String followeeFolder = "/Users/brian/todo/data/backup/www.zhihu.com";
-        String savePath = "/Users/brian/todo/data/backup/url_tokens/users.txt";
+        ZhihuConfiguration configuration = new ZhihuConfiguration();
+        String followeeFolder = configuration.getFolloweeDataPath();
+
         ZhihuMemberUrlTokenGetter getter = new ZhihuMemberUrlTokenGetter();
         getter.extractTokens(followeeFolder);
-        getter.save(savePath);
+        getter.save();
     }
 
 }

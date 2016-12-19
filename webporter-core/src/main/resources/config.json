@@ -6,5 +6,7 @@
   "cookies": {
     "CCC": "ccc",
     "DDD": "ddd"
-  }
+  },
+  "retryTimes":3,
+  "sleepTime":10
 }

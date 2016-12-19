@@ -1,6 +1,5 @@
 package com.brianway.webporter.collector.zhihu;
 
-import com.brianway.webporter.configure.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
@@ -28,7 +27,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
 
     private static String QUERY_PARAMS = "?include=data%5B*%5D.url_token&offset=0&per_page=30&limit=30";
 
-    private Site site = getConfigured();
+    private Site site = new ZhihuConfiguration().getSite();
 
     public void process(Page page) {
         Json json = page.getJson();
@@ -50,12 +49,6 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
         return site;
     }
 
-    private Site getConfigured() {
-        Site site = Configuration.getConfiguredSite();
-        site.setRetryTimes(3).setSleepTime(10);
-        return site;
-    }
-
     private static String generateMemberUrl(String urlToken) {
         String encoded = null;
         try {
@@ -74,8 +67,11 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
         return urls;
     }
 
+    /**
+     * 下载关注列表的用户数据,用于提取 url_tokens
+     */
     public static void main(String[] args) {
-        String pipelinePath = "/Users/brian/todo/data/webmagic/followee";
+        String pipelinePath = new ZhihuConfiguration().getFolloweePath();
         int crawlSize = 1000000;
         Spider.create(new ZhihuFolloweePageProcessor())
                 .setScheduler(//new QueueScheduler()

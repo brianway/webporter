@@ -11,7 +11,7 @@ public class FileHelperTest {
     @Test
     public void testGetRawText(){
         String path = this.getClass().getResource("/").getPath();
-        String file = path+"/"+"site-config.json";
+        String file = path+"/"+ "config.json";
         String rawText = FileHelper.getRawText(file);
         Assert.assertNotNull(rawText);
         Assert.assertTrue(rawText.contains("headers"));
