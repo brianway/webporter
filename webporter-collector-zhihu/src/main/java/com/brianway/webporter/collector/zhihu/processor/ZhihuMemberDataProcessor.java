@@ -7,6 +7,7 @@ import com.brianway.webporter.data.ConsoleOutpipeline;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.FileRawInput;
 import com.brianway.webporter.data.HashSetDuplicateRemover;
+import com.brianway.webporter.data.OutPipeline;
 import com.brianway.webporter.data.elasticsearch.Document;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -48,11 +49,16 @@ public class ZhihuMemberDataProcessor implements DataProcessor<File, Document> {
         ConsoleOutpipeline<Document> outPipeline = new ConsoleOutpipeline<>();
 
         BaseAssembler.create(new FileRawInput(folder), processor)
-                .addOutPipeline(outPipeline)
+                .addOutPipeline(new OutPipeline<Document>() {
+                    @Override
+                    public void process(Document outItem) {
+
+                    }
+                })
                 .thread(10)
                 .run();
 
         System.out.println("out sent :" + outPipeline.getCount());
-
     }
+
 }
