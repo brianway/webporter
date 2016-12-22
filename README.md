@@ -12,14 +12,14 @@ webporter 寓意“我们不生产数据，我们只是互联网的搬运工～�
 
 webporter 的主要特色：
 
-- 基于国产 Java 爬虫框架 webmagic,是众多 Python 爬虫中的一股清流
+- 基于国产 Java 爬虫框架 webmagic，是众多 Python 爬虫中的一股清流
 - 完全模块化的设计，强大的可扩展性
 - 核心简单，但是涵盖爬虫应用的完整流程，是爬虫应用的实践样例
 - 使用 JSON 配置，无需改动源码
 - 支持多线程
 - 支持向 Elasticsearch 批量导入
 
-**注意：webporter 不是爬虫框架，而是如何使用爬虫框架进行实战的样例，并把公共部分抽象成基础/工具模块，方便用户快速定制自己的爬虫应用**
+**注意：webporter 不是爬虫框架，而是如何使用爬虫框架进行实战的样例，偏休闲性质，不建议使用在生产环境。** 生产环境建议使用 webmagic 或者 scrapy
 
 webporter 核心模块的架构和设计主要参考了  **webmagic**
 [https://github.com/code4craft/webmagic](https://github.com/code4craft/webmagic)
@@ -30,7 +30,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 详细的数据分析文章请看我的博客 [《爬取知乎60万用户信息之后的简单分析》](http://brianway.github.io/2016/12/20/webporter-zhihu-user-analysis/)
 
-- 下载数据：去重导入 Elasticsearch 后大概有 60+ 万用户数据
+- 下载数据：去重导入 Elasticsearch 后大概有 60+ 万用户数据(目前没有遇到反爬限制)
 
 ![索引状态图](http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%9C%A8ES%E7%B4%A2%E5%BC%95%E7%8A%B6%E6%80%81.jpg)
 
@@ -52,7 +52,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 - Elasticsearch 5.0.1
 - Kibana 5.0.1
 
-新手可参考我的博客 [《Elasticsearch 5.0-安装使用》](http://brianway.github.io/2016/12/13/elasticsearch-installation/)快速上手 Elasticsearch+Kibana)
+新手可参考我的博客 [《Elasticsearch 5.0-安装使用》](http://brianway.github.io/2016/12/13/elasticsearch-installation/)快速上手 Elasticsearch+Kibana
 
 ## 快速开始
 
@@ -77,12 +77,12 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 }
 ```
 
-需要修改两处：`authorization` 和 `base_dir`。
+**仅需要修改两处：`authorization` 和 `base_dir` 即可**
 
 - `authorization`: 需要知乎账户在已登录状态下自行在浏览器抓包提取该 HTTP 响应头
 - `base_dir`: 为保存数据文件的根目录，需具有写权限
 
-更多关于 `site` 的属性配置请参考 [WebMagic in Action - Site Config](http://webmagic.io/docs/zh/posts/ch4-basic-page-processor/spider-config.html)
+配完就可以直接使用了。更多关于 `site` 的属性配置请参考 [WebMagic in Action - Site Config](http://webmagic.io/docs/zh/posts/ch4-basic-page-processor/spider-config.html)
 
 2.启动爬虫
 
