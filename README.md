@@ -79,7 +79,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 **仅需要修改两处：`authorization` 和 `base_dir` 即可**
 
-- `authorization`: 需要知乎账户在已登录状态下自行在浏览器抓包提取该 HTTP 响应头
+- `authorization`: 需要知乎账户在已登录状态下自行在浏览器抓包提取该 HTTP 响应头,获取路径为进入个人中心，然后F12开启调试器，然后点击主页中关注者链接，此时查看调试器窗口中followes的get请求，内部包含authorization字段
 - `base_dir`: 为保存数据文件的根目录，需具有写权限
 
 配完就可以直接使用了。更多关于 `site` 的属性配置请参考 [WebMagic in Action - Site Config](http://webmagic.io/docs/zh/posts/ch4-basic-page-processor/spider-config.html)
