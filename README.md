@@ -79,7 +79,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 **仅需要修改两处：`authorization` 和 `base_dir` 即可**
 
-- `authorization`: 需要知乎账户在已登录状态下自行在浏览器抓包提取该 HTTP 响应头
+- `authorization`: 需要知乎账户在已登录状态下自行在浏览器抓包提取该 HTTP 响应头。若有疑问请参考 [issue 3](https://github.com/brianway/webporter/issues/3)
 - `base_dir`: 为保存数据文件的根目录，需具有写权限
 
 配完就可以直接使用了。更多关于 `site` 的属性配置请参考 [WebMagic in Action - Site Config](http://webmagic.io/docs/zh/posts/ch4-basic-page-processor/spider-config.html)
@@ -89,7 +89,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 依次运行 `webporter-collector-zhihu` 模块的下面两个类的 `main` 方法即可。(*注意：由于这两个阶段是串行的,不要同时启动这两个类*)
 
 - [`ZhihuFolloweePageProcessor`](/webporter-collector-zhihu/src/main/java/com/brianway/webporter/collector/zhihu/download/ZhihuFolloweePageProcessor.java):该类用于从知乎下载用户信息，下载的数据可以复制粘贴在 [在线 json 格式化工具](http://tool.oschina.net/codeformat/json)中查看
-- [`FolloweeUploader`](/webporter-collector-zhihu/src/main/java/com/brianway/webporter/collector/zhihu/upload/FolloweeUploader.java):该类用户将用户信息上传到 Elasticsearch (需要提前安装并运行 Elasticsearch)
+- [`FolloweeUploader`](/webporter-collector-zhihu/src/main/java/com/brianway/webporter/collector/zhihu/upload/FolloweeUploader.java):该类用户将用户信息上传到 Elasticsearch (需要提前安装并运行 Elasticsearch)，知乎数据的 index 名称为 `zhihu`
 
 
 3.可视化
