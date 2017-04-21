@@ -96,6 +96,13 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 安装好 [Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/5.0/index.html) 和 [Kibana](https://www.elastic.co/guide/en/kibana/5.0/index.html) 后，在 Kibana 中使用 Visualize 对数据可视化即可
 
+## 赞助
+
+如果您觉得该项目对您有帮助，请扫描下方二维码对我进行鼓励，以便我更好的维护和更新，谢谢支持！
+
+![支付宝](http://7xsna4.com1.z0.glb.clouddn.com/alipay_small.png)
+![微信](http://7xsna4.com1.z0.glb.clouddn.com/wechatpay_small.png)
+
 
 ## TODO
 
