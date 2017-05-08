@@ -1,0 +1,12 @@
+{
+  "site": {
+    "domain": "www.zhihu.com",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
+      "authorization": "Your own authorization here."
+    },
+    "retryTimes": 3,
+    "sleepTime": 10
+  },
+  "base_dir": "/Users/brian/zhihu-crawl/"
+}

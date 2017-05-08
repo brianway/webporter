@@ -14,7 +14,7 @@ public class DemoDataProcessorTest extends BaseTest {
 
     @Test
     public void testProcess() {
-        String filePath = baseDir + "0a0c04441cf800d231ed72dffd8a9977.html";
+        String filePath = rootDir + "0a0c04441cf800d231ed72dffd8a9977.html";
         File file = new File(filePath);
         int itemSize = 20;
         DemoDataProcessor processor = new DemoDataProcessor();

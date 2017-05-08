@@ -17,7 +17,7 @@ public class FileHelperTest extends BaseTest {
 
     @Test
     public void testGetRawText() {
-        String file = baseDir + "config.json";
+        String file = rootDir + "config.json";
         String rawText = FileHelper.getRawText(file);
         Assert.assertNotNull(rawText);
         Assert.assertTrue(rawText.contains("headers"));
@@ -25,7 +25,7 @@ public class FileHelperTest extends BaseTest {
 
     @Test
     public void testReadFileAsLines() {
-        String filePath = baseDir + "line-file.html";
+        String filePath = rootDir + "line-file.html";
         int lineNumber = 6;
 
         List<String> lines = FileHelper.readFileAsLines(filePath);
@@ -41,7 +41,7 @@ public class FileHelperTest extends BaseTest {
 
     @Test
     public void testProcessFileByPath() throws IOException {
-        String filePath = baseDir + "line-file.html";
+        String filePath = rootDir + "line-file.html";
         int nonEmptyNumber = 4;
 
         List<String> content = FileHelper.processFile(filePath, (br) -> {
@@ -60,7 +60,7 @@ public class FileHelperTest extends BaseTest {
 
     @Test
     public void testProcessFileByFile() throws IOException {
-        String filePath = baseDir + "line-file.html";
+        String filePath = rootDir + "line-file.html";
         File file = new File(filePath);
         int emptyNumber = 2;
 
