@@ -8,6 +8,7 @@ import us.codecraft.webmagic.Site;
 
 /**
  * Created by brian on 16/12/19.
+ * //TODO 修改这个测试用例
  */
 public class ZhihuConfigurationTest {
 
@@ -17,7 +18,7 @@ public class ZhihuConfigurationTest {
 
     @Before
     public void init() {
-        baseDir = "/Users/brian/todo/data/zhihu/";
+        baseDir = "/Users/brian/todo/zhihu-crawl/";
         site = Site.me()
                 .setDomain("www.zhihu.com")
                 .addHeader("authorization", "Your own authorization here.")

@@ -8,5 +8,5 @@
     "retryTimes": 3,
     "sleepTime": 10
   },
-  "base_dir": "/Users/brian/todo/data/zhihu/"
+  "base_dir": "/Users/brian/todo/zhihu-crawl/"
 }

@@ -8,7 +8,8 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.scheduler.component.BloomFilterDuplicateRemover;
+import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
+import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 import us.codecraft.webmagic.selector.Json;
 
 import java.io.UnsupportedEncodingException;
@@ -76,7 +77,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
         int crawlSize = 1000000;
         Spider.create(new ZhihuFolloweePageProcessor())
                 .setScheduler(//new QueueScheduler()
-                        new FixedFileCacheQueueScheduler(pipelinePath)
+                        new FileCacheQueueScheduler(pipelinePath)
                                 .setDuplicateRemover(new BloomFilterDuplicateRemover(crawlSize)))
                 .addPipeline(new FilePipeline(pipelinePath))
                 .addUrl(generateMemberUrl("hydro-ding"))

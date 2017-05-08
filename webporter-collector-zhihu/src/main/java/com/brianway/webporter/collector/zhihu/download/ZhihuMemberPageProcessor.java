@@ -8,6 +8,7 @@ import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -51,7 +52,7 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
         String pipelinePath = configuration.getMemberPath();
 
         Spider spider = Spider.create(new ZhihuMemberPageProcessor())
-                .setScheduler(new FixedFileCacheQueueScheduler(pipelinePath))
+                .setScheduler(new FileCacheQueueScheduler(pipelinePath))
                 .addPipeline(new ZhihuMemberPipeline(pipelinePath))
                 .thread(20);
 

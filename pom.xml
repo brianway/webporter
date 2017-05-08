@@ -16,9 +16,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit.version>4.11</junit.version>
-        <webmagic.version>0.5.3</webmagic.version>
+        <webmagic.version>0.6.1</webmagic.version>
         <log4j.version>2.6.2</log4j.version>
         <slf4j.version>1.7.21</slf4j.version>
+        <guava.version>15.0</guava.version>
     </properties>
 
     <description>
@@ -61,6 +62,12 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <dependency>

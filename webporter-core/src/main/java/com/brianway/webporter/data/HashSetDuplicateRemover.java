@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by brian on 16/12/15.
+ * //TODO 看能不能去掉 guava 依赖
  */
 public class HashSetDuplicateRemover<ID> implements DuplicateRemover<ID> {
 

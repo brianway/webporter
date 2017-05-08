@@ -178,7 +178,6 @@ public class BaseAssembler<IN, OUT> {
 
     public static void main(String[] args) {
 
-        //String folder = "/Users/brian/todo/data/webmagic/www.zhihu.com";
         String folder = "/Users/brian/Desktop/zhihu/20161124/www.zhihu.com";
 
         OutPipeline<String> outPipeline = new ConsoleOutpipeline<>();
