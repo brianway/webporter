@@ -13,7 +13,9 @@ public class SiteConfigurationTest {
     public void testGetConfiguredSite() {
         SiteConfiguration siteConfiguration = new SiteConfiguration();
         Site site = siteConfiguration.getSite();
+        String key = "AAA";
+        String value = "aaa";
         Assert.assertNotNull(site);
-        Assert.assertEquals("aaa",site.getHeaders().get("AAA"));
+        Assert.assertEquals(value, site.getHeaders().get(key));
     }
 }

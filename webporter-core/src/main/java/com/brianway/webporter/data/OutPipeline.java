@@ -9,8 +9,6 @@ public interface OutPipeline<T> {
     void process(T outItem);
 
     default void process(List<T> outItems) {
-        for (T outItem : outItems) {
-            process(outItem);
-        }
+        outItems.forEach(this::process);
     }
 }

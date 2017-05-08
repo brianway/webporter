@@ -4,15 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.thread.CountableThreadPool;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by brian on 16/12/8.
+ * 数据处理框架的核心组装类
+ * 用于拼接输入,处理逻辑和输出,进行线程设置
  */
 public class BaseAssembler<IN, OUT> {
     private static final Logger logger = LoggerFactory.getLogger(BaseAssembler.class);
@@ -25,7 +25,7 @@ public class BaseAssembler<IN, OUT> {
 
     protected List<OutPipeline<OUT>> outPipelines = new ArrayList<>();
 
-    protected ExecutorService executorService;
+//    protected ExecutorService executorService;
 
     protected CountableThreadPool threadPool;
 
@@ -85,28 +85,27 @@ public class BaseAssembler<IN, OUT> {
                     break;
                 }
             } else {
-                threadPool.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            processInItem(inItem);
-                        } catch (Exception e) {
-                            logger.error("error: " + inItem, e);
-                        } finally {
-                            inItemCount.incrementAndGet();
-                        }
+                threadPool.execute(() -> {
+                    try {
+                        processInItem(inItem);
+                    } catch (Exception e) {
+                        logger.error("error: " + inItem, e);
+                    } finally {
+                        inItemCount.incrementAndGet();
                     }
                 });
             }
         }
+
         stat.set(STAT_STOPPED);
         long endTime = System.currentTimeMillis();
         logger.info("Process end. spent {} ms", (endTime - startTime));
+
         // release some resources
         close();
 
         endTime = System.currentTimeMillis();
-        logger.info("Total time: {}", endTime - startTime);
+        logger.info("Total time: {} ms", endTime - startTime);
         logger.info("Total outItemCount: {}", outItemCount);
     }
 
@@ -117,10 +116,7 @@ public class BaseAssembler<IN, OUT> {
         }
 
         outItemCount.addAndGet(outItems.size());
-
-        for (OutPipeline<OUT> outPipeline : outPipelines) {
-            outPipeline.process(outItems);
-        }
+        outPipelines.forEach(outPipeline -> outPipeline.process(outItems));
     }
 
     private void checkRunningStat() {
@@ -143,9 +139,7 @@ public class BaseAssembler<IN, OUT> {
 
     public void close() {
         destroyEach(dataProcessor);
-        for (OutPipeline<OUT> outPipeline : outPipelines) {
-            destroyEach(outPipeline);
-        }
+        outPipelines.forEach(this::destroyEach);
         threadPool.shutdown();
     }
 
@@ -182,15 +176,12 @@ public class BaseAssembler<IN, OUT> {
 
         OutPipeline<String> outPipeline = new ConsoleOutpipeline<>();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                BaseAssembler.<File, String>create(
-                        new FileRawInput(folder), new DemoDataProcessor())
-                        .addOutPipeline(outPipeline)
-                        .thread(10)
-                        .run();
-            }
+        new Thread(() -> {
+            BaseAssembler.create(
+                    new FileRawInput(folder), new DemoDataProcessor())
+                    .addOutPipeline(outPipeline)
+                    .thread(10)
+                    .run();
         }).start();
 
     }

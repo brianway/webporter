@@ -1,8 +1,8 @@
 package com.brianway.webporter.util;
 
+import com.brianway.webporter.BaseTest;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -13,17 +13,11 @@ import java.util.List;
 /**
  * Created by brian on 16/11/24.
  */
-public class FileHelperTest {
-    private static String baseDir;
-
-    @BeforeClass
-    public static void init() {
-        baseDir = FileHelperTest.class.getResource("/").getPath();
-    }
+public class FileHelperTest extends BaseTest {
 
     @Test
     public void testGetRawText() {
-        String file = baseDir + "/" + "config.json";
+        String file = baseDir + "config.json";
         String rawText = FileHelper.getRawText(file);
         Assert.assertNotNull(rawText);
         Assert.assertTrue(rawText.contains("headers"));
@@ -31,7 +25,7 @@ public class FileHelperTest {
 
     @Test
     public void testReadFileAsLines() {
-        String filePath = baseDir + "/line-file.html";
+        String filePath = baseDir + "line-file.html";
         int lineNumber = 6;
 
         List<String> lines = FileHelper.readFileAsLines(filePath);
@@ -47,7 +41,7 @@ public class FileHelperTest {
 
     @Test
     public void testProcessFileByPath() throws IOException {
-        String filePath = baseDir + "/line-file.html";
+        String filePath = baseDir + "line-file.html";
         int nonEmptyNumber = 4;
 
         List<String> content = FileHelper.processFile(filePath, (br) -> {
@@ -66,7 +60,7 @@ public class FileHelperTest {
 
     @Test
     public void testProcessFileByFile() throws IOException {
-        String filePath = baseDir + "/line-file.html";
+        String filePath = baseDir + "line-file.html";
         File file = new File(filePath);
         int emptyNumber = 2;
 
