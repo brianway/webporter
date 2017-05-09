@@ -21,6 +21,6 @@ public class ZhihuMemberDataProcessorTest {
         Assert.assertNotNull(documents);
         Assert.assertEquals(1, documents.size());
         Assert.assertEquals(id, documents.get(0).getId());
-        System.out.println(documents.get(0));
+        //System.out.println(documents.get(0));
     }
 }

@@ -42,8 +42,8 @@ public class ZhihuFolloweePageProcessorTest extends BaseTest {
         Assert.assertNotNull(people);
         Assert.assertEquals(count, people.size());
 
-        System.out.println(people);
-        people.forEach(System.out::println);
+//        System.out.println(people);
+//        people.forEach(System.out::println);
     }
 
     @Test
