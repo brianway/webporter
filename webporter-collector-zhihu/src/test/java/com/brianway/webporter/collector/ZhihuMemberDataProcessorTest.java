@@ -14,7 +14,7 @@ public class ZhihuMemberDataProcessorTest {
     public void testProcess() {
         String path = getClass().getResource("/").getPath() + "/member.json";
         File file = new File(path);
-        String id = "bd0acb0c060e67370b886bd2f410fec6";
+        String id = "b0989c4ac16a4dc6939bd04945b5a5db";
 
         DataProcessor<File, Document> processor = new ZhihuMemberDataProcessor();
         List<Document> documents = processor.process(file);
