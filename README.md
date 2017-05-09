@@ -71,7 +71,7 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
       "authorization": "Your own authorization here."
     },
     "retryTimes": 3,
-    "sleepTime": 10
+    "sleepTime": 500
   },
   "base_dir": "/Users/brian/todo/data/zhihu/"
 }

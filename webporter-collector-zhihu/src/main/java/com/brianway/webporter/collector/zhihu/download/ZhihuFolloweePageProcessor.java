@@ -5,7 +5,6 @@ import com.brianway.webporter.util.StringHelper;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
@@ -27,7 +26,8 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
     public void process(Page page) {
         Json json = page.getJson();
         //System.out.println(json);
-        page.putField("seg", json);//TODO seg 硬编码了
+        page.putField(ZhihuPipeline.URL, page.getUrl());
+        page.putField(ZhihuPipeline.RESPONSE, json);
 
         String isEnd = json.jsonPath("$.paging.is_end").get();
         if (!Boolean.parseBoolean(isEnd)) {
@@ -67,7 +67,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
                 .setScheduler(//new QueueScheduler()
                         new FileCacheQueueScheduler(pipelinePath)
                                 .setDuplicateRemover(new BloomFilterDuplicateRemover(crawlSize)))
-                .addPipeline(new FilePipeline(pipelinePath))
+                .addPipeline(new ZhihuPipeline(pipelinePath))
                 .addUrl(generateFolloweeUrl("hydro-ding"))
                 .thread(20)
                 .run();

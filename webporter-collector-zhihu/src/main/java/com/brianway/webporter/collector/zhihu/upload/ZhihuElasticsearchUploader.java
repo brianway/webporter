@@ -7,9 +7,6 @@ import com.brianway.webporter.data.elasticsearch.ElasticsearchUploader;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Created by brian on 16/12/14.
- */
 public class ZhihuElasticsearchUploader extends ElasticsearchUploader implements OutPipeline<Document>, AutoCloseable {
 
     private String index;

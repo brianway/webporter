@@ -9,7 +9,7 @@ public class BaseTest {
     protected static String rootDir;
 
     @BeforeClass
-    public static void init() {
+    public static void initClass() {
         rootDir = BaseTest.class.getResource("/").getPath();
     }
 

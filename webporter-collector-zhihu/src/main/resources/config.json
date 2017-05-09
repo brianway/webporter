@@ -6,7 +6,7 @@
       "authorization": "Your own authorization here."
     },
     "retryTimes": 3,
-    "sleepTime": 10
+    "sleepTime": 500
   },
   "base_dir": "/Users/brian/todo/zhihu-crawl/"
 }

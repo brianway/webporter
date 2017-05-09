@@ -20,8 +20,8 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
     private Site site = new ZhihuConfiguration().getSite();
 
     public void process(Page page) {
-        page.putField(ZhihuMemberPipeline.URL, page.getUrl());
-        page.putField(ZhihuMemberPipeline.RESPONSE, page.getRawText());
+        page.putField(ZhihuPipeline.URL, page.getUrl());
+        page.putField(ZhihuPipeline.RESPONSE, page.getRawText());
     }
 
     public Site getSite() {
@@ -45,13 +45,13 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
 
         Spider spider = Spider.create(new ZhihuMemberPageProcessor())
                 .setScheduler(new FileCacheQueueScheduler(pipelinePath))
-                .addPipeline(new ZhihuMemberPipeline(pipelinePath))
+                .addPipeline(new ZhihuPipeline(pipelinePath))
                 .thread(20);
 
-        MemberURLTokenGenerator getter = new MemberURLTokenGenerator();
-        for (String token : getter.getURLTokens()) {
-            spider.addUrl(generateMemberUrl(token));
-        }
+        MemberURLTokenGenerator generator = new MemberURLTokenGenerator();
+        generator.generateURLTokens().stream()
+                .map(ZhihuMemberPageProcessor::generateMemberUrl)
+                .forEach(spider::addUrl);
 
         spider.run();
     }

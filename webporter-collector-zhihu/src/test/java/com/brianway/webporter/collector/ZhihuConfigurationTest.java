@@ -6,10 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import us.codecraft.webmagic.Site;
 
-/**
- * Created by brian on 16/12/19.
- * //TODO 修改这个测试用例
- */
 public class ZhihuConfigurationTest {
 
     private String baseDir;

@@ -1,6 +1,5 @@
 package com.brianway.webporter.collector.zhihu.processor;
 
-import com.brianway.webporter.collector.zhihu.SegmentReader;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.HashSetDuplicateRemover;
 import com.brianway.webporter.data.elasticsearch.Document;
@@ -20,7 +19,7 @@ public class ZhihuFolloweeDataProcessor implements DataProcessor<File, Document>
 
     @Override
     public List<Document> process(File inItem) {
-        String s = SegmentReader.readFollowees(inItem);
+        String s = MemberURLTokenGenerator.readFollowees(inItem);
         List<Document> documents = null;
 
         if (!StringUtils.isEmpty(s)) {

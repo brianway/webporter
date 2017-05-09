@@ -1,6 +1,5 @@
 package com.brianway.webporter.collector.zhihu.processor;
 
-import com.brianway.webporter.collector.zhihu.SegmentReader;
 import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
 import com.brianway.webporter.data.BaseAssembler;
 import com.brianway.webporter.data.DataProcessor;
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,13 +31,36 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
 
     private Set<String> urlTokens = Sets.newSetFromMap(new ConcurrentHashMap<>());
 
-    private final static String URL_TOKEN_FILENAME = "url_tokens";
+    public final static String URLTOKEN_FILENAME = "url_tokens";
 
-    private final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath() + URL_TOKEN_FILENAME;
+    private final static String DEFAULT_FOLDER = new ZhihuConfiguration().getFolloweePath();
+    private final static String DEFAULT_PATH = DEFAULT_FOLDER + URLTOKEN_FILENAME;
+
+    private String folder;
+    private String path;
+
+    public MemberURLTokenGenerator() {
+        this(DEFAULT_FOLDER, DEFAULT_PATH);
+    }
+
+    /**
+     * @param folder followee 文件所在的文件夹
+     * @param path 保存 url_token 列表的文件路径
+     */
+    public MemberURLTokenGenerator(String folder, String path) {
+        this.folder = folder;
+        this.path = path;
+    }
+
+    public Set<String> generateURLTokens() {
+        extractTokens();
+        save();
+        return getURLTokens();
+    }
 
     @Override
     public List<String> process(File inItem) {
-        String s = SegmentReader.readFollowees(inItem);
+        String s = readFollowees(inItem);
         if (!StringUtils.isEmpty(s)) {
             Json json = new Json(s);
             List<String> tokens = json.jsonPath("$.data[*].url_token").all();
@@ -46,20 +69,25 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
         return null;
     }
 
-    public Set<String> extractTokens(String folder) {
+    public static String readFollowees(File inItem) {
+        List<String> followees = FileHelper.processFile(inItem, br -> {
+            br.readLine();//pass first line
+            String s = br.readLine();
+            if (!StringUtils.isEmpty(s)) {
+                s = s.substring(s.indexOf("{"));
+            }
+            return Collections.singletonList(s);
+        }).orElse(new ArrayList<>());
+
+        return followees.size() == 0 ? null : followees.get(0);
+    }
+
+    private Set<String> extractTokens() {
         BaseAssembler.create(new FileRawInput(folder), this).thread(10).run();
         return urlTokens;
     }
 
-    public void save() {
-        save(DEFAULT_PATH);
-    }
-
-    public Set<String> getURLTokens() {
-        return getURLTokens(DEFAULT_PATH);
-    }
-
-    public void save(String path) {
+    private void save() {
         try {
             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF-8"));
             urlTokens.forEach(printWriter::println);
@@ -70,30 +98,17 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
 
     }
 
-    public Set<String> getURLTokens(String path) {
+    private Set<String> getURLTokens() {
         List<String> tokens = FileHelper.processFile(path, br -> {
             List<String> ts = new ArrayList<>();
             String s;
             while ((s = br.readLine()) != null) {
                 ts.add(s);
             }
-
             return ts;
         }).orElse(new ArrayList<>());
 
         return new HashSet<>(tokens);
-    }
-
-    /**
-     * 从下载数据中提取 url_token,每行一个,保存到文件
-     */
-    public static void main(String[] args) {
-        ZhihuConfiguration configuration = new ZhihuConfiguration();
-        String followeeFolder = configuration.getFolloweeDataPath();
-
-        MemberURLTokenGenerator generator = new MemberURLTokenGenerator();
-        generator.extractTokens(followeeFolder);
-        generator.save();
     }
 
 }
