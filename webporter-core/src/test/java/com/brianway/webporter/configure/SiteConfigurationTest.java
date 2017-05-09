@@ -4,9 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import us.codecraft.webmagic.Site;
 
-/**
- * Created by brian on 16/11/24.
- */
 public class SiteConfigurationTest {
 
     @Test
@@ -18,4 +15,5 @@ public class SiteConfigurationTest {
         Assert.assertNotNull(site);
         Assert.assertEquals(value, site.getHeaders().get(key));
     }
+
 }

@@ -5,9 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import us.codecraft.webmagic.Site;
 
-/**
- * Created by brian on 17/5/9.
- */
 public class BasicConfigurationTest extends BaseTest {
     @Test
     public void testGetConfiguration() {
@@ -21,5 +18,6 @@ public class BasicConfigurationTest extends BaseTest {
         Assert.assertNotNull(site);
         Assert.assertEquals(domain, site.getDomain());
         Assert.assertEquals(retryTimes, site.getRetryTimes());
+        Assert.assertEquals(baseDir, basicConfig.getBaseDir());
     }
 }

@@ -2,10 +2,10 @@ package com.brianway.webporter.collector.zhihu;
 
 import com.brianway.webporter.configure.BasicConfiguration;
 
-/**
- * Created by brian on 16/12/19.
- */
 public class ZhihuConfiguration extends BasicConfiguration {
+
+    public static final String SUBDIR_MEMBER = "member/";
+    public static final String SUBDIR_FOLLOWEE = "followee/";
 
     public ZhihuConfiguration(String path) {
         super(path);
@@ -16,11 +16,11 @@ public class ZhihuConfiguration extends BasicConfiguration {
     }
 
     public String getMemberPath() {
-        return getBaseDir() + "member/";
+        return getBaseDir() + SUBDIR_MEMBER;
     }
 
     public String getFolloweePath() {
-        return getBaseDir() + "followee/";
+        return getBaseDir() + SUBDIR_FOLLOWEE;
     }
 
     public String getMemberDataPath() {
