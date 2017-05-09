@@ -9,9 +9,6 @@ import org.junit.Test;
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by brian on 16/12/19.
- */
 public class ZhihuMemberDataProcessorTest {
     @Test
     public void testProcess() {

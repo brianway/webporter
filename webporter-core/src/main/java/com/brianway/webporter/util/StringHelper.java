@@ -6,9 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-/**
- * Created by brian on 17/5/9.
- */
 public class StringHelper {
     private static Logger logger = LoggerFactory.getLogger(StringHelper.class);
 

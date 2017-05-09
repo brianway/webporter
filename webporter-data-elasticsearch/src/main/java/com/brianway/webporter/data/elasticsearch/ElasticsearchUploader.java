@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by brian on 16/11/29.
+ *
+ * Elasticsearch 上传的核心类
  */
 public class ElasticsearchUploader {
     private static Logger logger = LoggerFactory.getLogger(ElasticsearchUploader.class);

@@ -2,9 +2,6 @@ package com.brianway.webporter.configure;
 
 import com.brianway.webporter.util.FileHelper;
 
-/**
- * Created by brian on 16/12/19.
- */
 public abstract class AbstractConfiguration {
 
     public static final String DEFAULT_CONFIG_FILE = "config.json";

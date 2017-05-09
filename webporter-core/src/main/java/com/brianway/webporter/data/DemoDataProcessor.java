@@ -10,9 +10,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by brian on 16/12/6.
- */
 public class DemoDataProcessor implements DataProcessor<File, String> {
     private static final Logger logger = LoggerFactory.getLogger(DemoDataProcessor.class);
 

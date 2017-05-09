@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 /**
  * Created by brian on 16/11/24.
+ *
+ * 文件处理的辅助类
  */
 public class FileHelper {
     private static final Logger logger = LoggerFactory.getLogger(FileHelper.class);

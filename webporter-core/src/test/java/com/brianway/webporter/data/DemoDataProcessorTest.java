@@ -7,9 +7,6 @@ import org.junit.Test;
 import java.io.File;
 import java.util.List;
 
-/**
- * Created by brian on 16/12/6.
- */
 public class DemoDataProcessorTest extends BaseTest {
 
     @Test

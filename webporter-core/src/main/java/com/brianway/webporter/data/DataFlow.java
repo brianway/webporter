@@ -17,7 +17,7 @@ public class DataFlow<T> {
         return queue.poll();
     }
 
-    protected T take() throws InterruptedException{
+    protected T take() throws InterruptedException {
         return queue.take();
     }
 

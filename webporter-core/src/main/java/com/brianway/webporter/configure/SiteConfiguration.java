@@ -3,9 +3,6 @@ package com.brianway.webporter.configure;
 import com.alibaba.fastjson.JSON;
 import us.codecraft.webmagic.Site;
 
-/**
- * Created by brian on 16/11/23.
- */
 public class SiteConfiguration extends AbstractConfiguration {
 
     private Site site;

@@ -4,9 +4,6 @@ import com.brianway.webporter.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created by brian on 16/11/30.
- */
 public class FileRawInputTest extends BaseTest {
     @Test
     public void testListFiles() {

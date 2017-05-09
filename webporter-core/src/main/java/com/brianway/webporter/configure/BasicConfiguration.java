@@ -6,9 +6,6 @@ import us.codecraft.webmagic.Site;
 
 import java.io.File;
 
-/**
- * Created by brian on 17/5/9.
- */
 public class BasicConfiguration extends AbstractConfiguration {
     protected Site site;
 

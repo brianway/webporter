@@ -1,5 +1,5 @@
 {
-  "domain":"www.zhihu.com",
+  "domain": "www.zhihu.com",
   "headers": {
     "BBB": "bbb"
   },
@@ -7,6 +7,6 @@
     "CCC": "ccc",
     "DDD": "ddd"
   },
-  "retryTimes":3,
-  "sleepTime":10
+  "retryTimes": 3,
+  "sleepTime": 10
 }

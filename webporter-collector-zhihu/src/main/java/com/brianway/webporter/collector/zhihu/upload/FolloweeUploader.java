@@ -10,9 +10,6 @@ import com.brianway.webporter.data.elasticsearch.Document;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by brian on 16/12/19.
- */
 public class FolloweeUploader {
     public static void upload() {
         String index = "zhihu";

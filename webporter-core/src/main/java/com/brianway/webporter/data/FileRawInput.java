@@ -3,9 +3,6 @@ package com.brianway.webporter.data;
 import java.io.File;
 import java.util.Arrays;
 
-/**
- * Created by brian on 16/12/1.
- */
 public class FileRawInput extends RawInput<File> {
 
     public FileRawInput(String path) {

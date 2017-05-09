@@ -1,8 +1,5 @@
 package com.brianway.webporter.data.elasticsearch;
 
-/**
- * Created by brian on 16/12/8.
- */
 public class Document {
     protected String id;
     protected String content;
