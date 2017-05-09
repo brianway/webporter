@@ -25,7 +25,6 @@ public class DemoDataProcessor implements DataProcessor<File, String> {
             in.readLine();//pass first line
             s = in.readLine();
             if (s != null) {
-                s = s.substring(s.indexOf("{"));
                 Json json = new Json(s);
                 outItems = json.jsonPath("$.data[*].[*]").all();
             }

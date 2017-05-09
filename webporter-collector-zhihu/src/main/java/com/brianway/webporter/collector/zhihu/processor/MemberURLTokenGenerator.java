@@ -33,8 +33,8 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
 
     public final static String URLTOKEN_FILENAME = "url_tokens";
 
-    private final static String DEFAULT_FOLDER = new ZhihuConfiguration().getFolloweePath();
-    private final static String DEFAULT_PATH = DEFAULT_FOLDER + URLTOKEN_FILENAME;
+    private final static String DEFAULT_FOLDER = new ZhihuConfiguration().getFolloweeDataPath();
+    private final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath() + URLTOKEN_FILENAME;
 
     private String folder;
     private String path;
@@ -73,9 +73,6 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
         List<String> followees = FileHelper.processFile(inItem, br -> {
             br.readLine();//pass first line
             String s = br.readLine();
-            if (!StringUtils.isEmpty(s)) {
-                s = s.substring(s.indexOf("{"));
-            }
             return Collections.singletonList(s);
         }).orElse(new ArrayList<>());
 
@@ -109,6 +106,12 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
         }).orElse(new ArrayList<>());
 
         return new HashSet<>(tokens);
+    }
+
+    public static void main(String[] args) {
+        MemberURLTokenGenerator generator = new MemberURLTokenGenerator();
+        generator.generateURLTokens().stream()
+                .forEach(System.out::println);
     }
 
 }
