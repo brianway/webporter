@@ -7,8 +7,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by brian on 16/11/24.
@@ -40,40 +43,31 @@ public class FileHelper {
     }
 
     public static List<String> readFileAsLines(File inItem) {
-        BufferedReader in = null;
-        List<String> lines = new ArrayList<>();
-        try {
-            in = new BufferedReader(
-                    new FileReader(inItem)
-            );
-            String s = in.readLine();
-            while (s != null) {
-                lines.add(s);
-                s = in.readLine();
-            }
-            in.close();
-            return lines;
-        } catch (IOException e) {
-            logger.error("IOException when read  data from file : {}", e);
-            return null;
-        }
+        String path = inItem.getPath();
+        return readFileAsLines(path);
     }
 
     public static List<String> readFileAsLines(String filePath) {
-        File file = new File(filePath);
-        return readFileAsLines(file);
+        List<String> lines = null;
+        try {
+            lines = Files.lines(Paths.get(filePath)).collect(Collectors.toList());
+        } catch (IOException e) {
+            logger.error("IOException when read  data from file : {}", e);
+        }
+        return lines;
     }
 
-    public static List<String> processFile(String filePath, BufferdReaderProcessor p) throws IOException {
+    public static Optional<List<String>> processFile(String filePath, BufferdReaderProcessor p) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            return p.process(br);
+            return Optional.ofNullable(p.process(br));
+        } catch (IOException e) {
+            logger.error("IOException when process file : {}", e);
         }
+        return Optional.empty();
     }
 
-    public static List<String> processFile(File file, BufferdReaderProcessor p) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            return p.process(br);
-        }
+    public static Optional<List<String>> processFile(File file, BufferdReaderProcessor p) {
+        return processFile(file.getPath(), p);
     }
 
     public interface BufferdReaderProcessor {

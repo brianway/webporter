@@ -1,11 +1,13 @@
 package com.brianway.webporter.collector;
 
+import com.brianway.webporter.collector.zhihu.download.ZhihuFolloweePageProcessor;
 import com.brianway.webporter.util.FileHelper;
 import org.junit.Assert;
 import org.junit.Test;
 import us.codecraft.webmagic.selector.Json;
 import us.codecraft.webmagic.selector.JsonPathSelector;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,11 +16,11 @@ import java.util.List;
  * 参考文档 http://webmagic.io/docs/zh/posts/chx-cases/js-render-page.html
  * 两种写法都可以,后一种更简洁
  */
-public class ZhihuFolloweePageProcessorTest {
+public class ZhihuFolloweePageProcessorTest extends BaseTest {
 
     @Test
     public void testExtractJson() {
-        String dataFile = this.getClass().getResource("/").getPath() + "/followee.json";
+        String dataFile = rootDir + "followee.json";
         String jsonText = FileHelper.getRawText(dataFile);
         Json json = new Json(jsonText);
 
@@ -35,15 +37,31 @@ public class ZhihuFolloweePageProcessorTest {
         String tokens = "[zingfood, yu-bing-43, Muyunio, dongx5, zhong-guo-ke-pu-bo-lan, kate0115, fan-fan-11-9, dr-song-41, pppp-76-22, boldyoung]";
         Assert.assertEquals(tokens, urlTokens.toString());
 
-        //List<String> people = new JsonPathSelector("$.data[*].[*]").selectList(jsonText);
         List<String> people = json.jsonPath("$.data[*].[*]").all();
-        System.out.println(people);
-        for (String s : people) {
-            System.out.println(s);
-        }
+        int count = 10;
+        Assert.assertNotNull(people);
+        Assert.assertEquals(count, people.size());
 
+        System.out.println(people);
+        people.forEach(System.out::println);
     }
 
+    @Test
+    public void testGenerateFolloweeUrl() {
+        String urlToken = "hydro-ding";
+        String url = "https://www.zhihu.com/api/v4/members/hydro-ding/followees?include=data%5B*%5D.url_token&offset=0&per_page=30&limit=30";
+        String generatedUrl = ZhihuFolloweePageProcessor.generateFolloweeUrl(urlToken);
+        Assert.assertEquals(url, generatedUrl);
+    }
 
+    @Test
+    public void testGenerateFolloweeUrls() {
+        List<String> urlTokens = Arrays.asList("hydro-ding", "hydro-ding", "hydro-ding");
+        String url = "https://www.zhihu.com/api/v4/members/hydro-ding/followees?include=data%5B*%5D.url_token&offset=0&per_page=30&limit=30";
+        List<String> generatedUrls = ZhihuFolloweePageProcessor.generateFolloweeUrls(urlTokens);
+        generatedUrls.stream().forEach(
+                generatedUrl -> Assert.assertEquals(url, generatedUrl)
+        );
+    }
 
 }

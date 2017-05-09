@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by brian on 16/12/19.
+ * step 3: 将用户数据导入 Elasticsearch
  */
 public class MemberUploader {
     public static void upload() {

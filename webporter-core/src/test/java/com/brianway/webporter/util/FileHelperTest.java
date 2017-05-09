@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by brian on 16/11/24.
- */
 public class FileHelperTest extends BaseTest {
 
     @Test
@@ -24,11 +21,28 @@ public class FileHelperTest extends BaseTest {
     }
 
     @Test
-    public void testReadFileAsLines() {
+    public void testReadFileAsLinesByPath() {
         String filePath = rootDir + "line-file.html";
         int lineNumber = 6;
 
         List<String> lines = FileHelper.readFileAsLines(filePath);
+        Assert.assertNotNull(lines);
+        Assert.assertEquals(lineNumber, lines.size());
+
+        int nonEmptyNumber = 4;
+        int count = (int) lines.stream()
+                .filter(s -> !StringUtils.isEmpty(s))
+                .count();
+        Assert.assertEquals(nonEmptyNumber, count);
+    }
+
+    @Test
+    public void testReadFileAsLinesByFile() {
+        String filePath = rootDir + "line-file.html";
+        File file = new File(filePath);
+        int lineNumber = 6;
+
+        List<String> lines = FileHelper.readFileAsLines(file);
         Assert.assertNotNull(lines);
         Assert.assertEquals(lineNumber, lines.size());
 
@@ -53,7 +67,7 @@ public class FileHelperTest extends BaseTest {
                 }
             }
             return nonEmpties;
-        });
+        }).orElse(new ArrayList<>());
         Assert.assertNotNull(content);
         Assert.assertEquals(nonEmptyNumber, content.size());
     }
@@ -64,7 +78,7 @@ public class FileHelperTest extends BaseTest {
         File file = new File(filePath);
         int emptyNumber = 2;
 
-        List<String> content = FileHelper.processFile(file, (br) -> {
+        List<String> content = FileHelper.processFile(file, br -> {
             List<String> empties = new ArrayList<>();
             String s;
             while ((s = br.readLine()) != null) {
@@ -73,7 +87,7 @@ public class FileHelperTest extends BaseTest {
                 }
             }
             return empties;
-        });
+        }).orElse(new ArrayList<>());
         Assert.assertNotNull(content);
         Assert.assertEquals(emptyNumber, content.size());
     }

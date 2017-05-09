@@ -20,14 +20,14 @@ import java.util.Map;
 public class ZhihuMemberPipeline extends FilePipeline {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public static final String URL = "url";
-    public static final String RESPONSE = "response";
+    static final String URL = "url";
+    static final String RESPONSE = "response";
 
     /**
-     * create a ZhihuMemberPipeline with default path"/data/webmagic/"
+     * create a ZhihuMemberPipeline with default path"/data/webporter/"
      */
     public ZhihuMemberPipeline() {
-        setPath("/data/webmagic/");
+        setPath("/data/webporter/");
     }
 
     public ZhihuMemberPipeline(String path) {

@@ -5,36 +5,35 @@ import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
 import com.brianway.webporter.data.BaseAssembler;
 import com.brianway.webporter.data.DataProcessor;
 import com.brianway.webporter.data.FileRawInput;
+import com.brianway.webporter.util.FileHelper;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.selector.Json;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by brian on 16/12/18.
+ * 从原始下载数据提取 url_token,用于生成用户url
  */
 public class MemberURLTokenGenerator implements DataProcessor<File, String> {
     private static final Logger logger = LoggerFactory.getLogger(MemberURLTokenGenerator.class);
 
     private Set<String> urlTokens = Sets.newSetFromMap(new ConcurrentHashMap<>());
 
-    public final static String URL_TOKEN_FILENAME = "url_tokens";
+    private final static String URL_TOKEN_FILENAME = "url_tokens";
 
-    public final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath()
-            + URL_TOKEN_FILENAME;
+    private final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath() + URL_TOKEN_FILENAME;
 
     @Override
     public List<String> process(File inItem) {
@@ -42,17 +41,13 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
         if (!StringUtils.isEmpty(s)) {
             Json json = new Json(s);
             List<String> tokens = json.jsonPath("$.data[*].url_token").all();
-            for (String token : tokens) {
-                urlTokens.add(token);
-            }
+            tokens.forEach(urlTokens::add);
         }
         return null;
     }
 
     public Set<String> extractTokens(String folder) {
-        BaseAssembler.create(new FileRawInput(folder), this)
-                .thread(10)
-                .run();
+        BaseAssembler.create(new FileRawInput(folder), this).thread(10).run();
         return urlTokens;
     }
 
@@ -67,11 +62,7 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
     public void save(String path) {
         try {
             PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF-8"));
-
-            for (String token : urlTokens) {
-                printWriter.println(token);
-            }
-
+            urlTokens.forEach(printWriter::println);
             printWriter.close();
         } catch (IOException e) {
             logger.error("write file error", e);
@@ -80,25 +71,17 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
     }
 
     public Set<String> getURLTokens(String path) {
-        Set<String> urlTokens = new HashSet<>();
-        BufferedReader in;
-        try {
-            in = new BufferedReader(
-                    new FileReader(new File(path))
-            );
-
+        List<String> tokens = FileHelper.processFile(path, br -> {
+            List<String> ts = new ArrayList<>();
             String s;
-            while ((s = in.readLine()) != null) {
-                urlTokens.add(s);
+            while ((s = br.readLine()) != null) {
+                ts.add(s);
             }
 
-            in.close();
-            return urlTokens;
-        } catch (IOException e) {
-            logger.error("IOException when readFollowees user data from file : {}", e);
-            return null;
-        }
+            return ts;
+        }).orElse(new ArrayList<>());
 
+        return new HashSet<>(tokens);
     }
 
     /**

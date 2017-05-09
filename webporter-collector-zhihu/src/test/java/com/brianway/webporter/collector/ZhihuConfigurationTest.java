@@ -18,7 +18,7 @@ public class ZhihuConfigurationTest {
 
     @Before
     public void init() {
-        baseDir = "/Users/brian/todo/zhihu-crawl/";
+        baseDir = "/Users/brian/zhihu-crawl/";
         site = Site.me()
                 .setDomain("www.zhihu.com")
                 .addHeader("authorization", "Your own authorization here.")
