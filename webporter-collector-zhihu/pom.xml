@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>webporter-parent</artifactId>
-        <groupId>com.brianway.webporter</groupId>
+        <groupId>com.github.brianway</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -28,13 +28,13 @@
         </dependency>
 
         <dependency>
-            <groupId>com.brianway.webporter</groupId>
+            <groupId>com.github.brianway</groupId>
             <artifactId>webporter-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.brianway.webporter</groupId>
+            <groupId>com.github.brianway</groupId>
             <artifactId>webporter-data-elasticsearch</artifactId>
             <version>${project.version}</version>
         </dependency>

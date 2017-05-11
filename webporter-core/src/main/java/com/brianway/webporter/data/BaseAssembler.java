@@ -44,8 +44,10 @@ public class BaseAssembler<IN, OUT> {
     /**
      * 工厂方法
      *
+     * @param rawInput 原始输入
+     * @param dataProcessor 数据处理的类
      * @param <IN> 输入队列的类型参数
-     * @param <OUT> 输出队列的类型参数
+     * @param <OUT> 输出数据的类型参数
      * @return 组装类的实例
      */
     public static <IN, OUT> BaseAssembler<IN, OUT> create(

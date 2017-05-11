@@ -59,6 +59,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
 
     /**
      * 下载关注列表的用户数据,用于提取 url_tokens
+     * @param args 无须其他参数
      */
     public static void main(String[] args) {
         String pipelinePath = new ZhihuConfiguration().getFolloweePath();

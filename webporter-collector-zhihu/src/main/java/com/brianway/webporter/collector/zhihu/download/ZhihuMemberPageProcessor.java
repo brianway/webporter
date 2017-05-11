@@ -38,6 +38,7 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
 
     /**
      * 根据提取的 url_token 逐个下载用户的完整信息
+     * @param args 无须其他参数
      */
     public static void main(String[] args) {
         ZhihuConfiguration configuration = new ZhihuConfiguration();
