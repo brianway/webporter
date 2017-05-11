@@ -50,7 +50,6 @@
         <connection>scm:git:git@github.com:brianway/webporter.git</connection>
         <developerConnection>scm:git:git@github.com:brianway/webporter.git</developerConnection>
         <url>git@github.com:brianway/webporter.git</url>
-        <tag>HEAD</tag>
     </scm>
 
     <licenses>
