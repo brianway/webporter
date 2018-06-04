@@ -2,11 +2,12 @@
   "site": {
     "domain": "www.zhihu.com",
     "headers": {
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
-      "authorization": "Your own authorization here."
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36",
+	  "X-UDID": "APCvmFgTjA2PTpjFsTjc15kWKMlBMJJ7Vag=",
+	  "Cookie": "_zap=d35756d6-8530-4512-934a-d4ac74000ee4; __utma=155987696.492403388.1517840990.1517840990.1517840990.1; __utmz=155987696.1517840990.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); d_c0=\"APCvmFgTjA2PTpjFsTjc15kWKMlBMJJ7Vag=|1525518611\"; __DAYU_PP=MMUf3RbMn3ee2mzUNvQJffffffff83b23b7b6aed; q_c1=25af6ae0238e4f39b484eaaf92d1d807|1527508465000|1515585280000; _xsrf=7add93e5-45c4-4733-abdb-d6774ad16ef3; capsion_ticket=\"2|1:0|10:1528022290|14:capsion_ticket|44:YjdjODlhMjRhMWI0NDQzNmI2MjM5YWI0OGFkY2VlZDE=|150deeeec740cbb8c8b21e0b4a41090dc5058800cf4dadf33ddadee2de1bfe55\"; z_c0=\"2|1:0|10:1528022298|4:z_c0|92:Mi4xSU00OUFBQUFBQUFBOEstWVdCT01EU1lBQUFCZ0FsVk5HaE1CWEFCSUg2VmF6RTlCZTQwQTJHc1V0ZTdKR3YzaGtR|2633e75b1b77854a586f118a03068256a1506fb3941446559dea06015d58885e\"; tgw_l7_route=7139e401481ef2f46ce98b22af4f4bed"
     },
     "retryTimes": 3,
-    "sleepTime": 500
+    "sleepTime": 10000
   },
-  "base_dir": "/Users/brian/todo/zhihu-crawl/"
+  "base_dir": "F:/KingWang/crawler"
 }

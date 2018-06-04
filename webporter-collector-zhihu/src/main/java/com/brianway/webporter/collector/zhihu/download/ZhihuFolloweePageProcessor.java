@@ -5,13 +5,18 @@ import com.brianway.webporter.util.StringHelper;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.model.annotation.ExtractBy;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
 import us.codecraft.webmagic.selector.Json;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.management.MBeanServer;
 
 /**
  * Created by brian on 16/11/24.
@@ -21,7 +26,11 @@ import java.util.List;
  */
 public class ZhihuFolloweePageProcessor implements PageProcessor {
 
-    private Site site = new ZhihuConfiguration().getSite();
+    private Site site;
+
+    public ZhihuFolloweePageProcessor() throws Exception{
+    	this.site = new ZhihuConfiguration().getSite();
+    }
 
     public void process(Page page) {
         Json json = page.getJson();
@@ -45,7 +54,7 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
 
     public static String generateFolloweeUrl(String urlToken) {
         final String URL_TEMPLATE = "https://www.zhihu.com/api/v4/members/%s/followees";
-        final String QUERY_PARAMS = "?include=data%5B*%5D.url_token&offset=0&per_page=30&limit=30";
+        final String QUERY_PARAMS = "?include=data%5B*%5D.answer_count%2Carticles_count%2Cgender%2Cfollower_count%2Cis_followed%2Cis_following%2Cbadge%5B%3F(type%3Dbest_answerer)%5D.topics&offset=0&limit=20";
 
         String encoded = StringHelper.urlEncode(urlToken);
         return String.format(URL_TEMPLATE, encoded) + QUERY_PARAMS;
@@ -61,9 +70,11 @@ public class ZhihuFolloweePageProcessor implements PageProcessor {
      * 下载关注列表的用户数据,用于提取 url_tokens
      * @param args 无须其他参数
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String pipelinePath = new ZhihuConfiguration().getFolloweePath();
-        int crawlSize = 100_0000;
+        System.out.println(pipelinePath);
+        int crawlSize = 100_0000;//下划线使数据更清晰
+        System.out.println(crawlSize);
         Spider.create(new ZhihuFolloweePageProcessor())
                 .setScheduler(//new QueueScheduler()
                         new FileCacheQueueScheduler(pipelinePath)
