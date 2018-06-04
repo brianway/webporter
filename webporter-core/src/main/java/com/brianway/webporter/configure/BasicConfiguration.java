@@ -1,5 +1,7 @@
 package com.brianway.webporter.configure;
 
+import java.io.UnsupportedEncodingException;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import us.codecraft.webmagic.Site;
@@ -9,11 +11,11 @@ public class BasicConfiguration extends AbstractConfiguration {
 
     protected String baseDir;
 
-    public BasicConfiguration(String path) {
+    public BasicConfiguration(String path) throws UnsupportedEncodingException {
         super(path);
     }
 
-    public BasicConfiguration() {
+    public BasicConfiguration() throws Exception{
     }
 
     @Override

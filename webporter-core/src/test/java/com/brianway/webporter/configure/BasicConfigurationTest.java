@@ -1,13 +1,16 @@
 package com.brianway.webporter.configure;
 
 import com.brianway.webporter.BaseTest;
+
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Assert;
 import org.junit.Test;
 import us.codecraft.webmagic.Site;
 
 public class BasicConfigurationTest extends BaseTest {
     @Test
-    public void testGetConfiguration() {
+    public void testGetConfiguration() throws UnsupportedEncodingException {
         String configPath = rootDir + "basic-config.json";
         int retryTimes = 3;
         String domain = "www.zhihu.com";
