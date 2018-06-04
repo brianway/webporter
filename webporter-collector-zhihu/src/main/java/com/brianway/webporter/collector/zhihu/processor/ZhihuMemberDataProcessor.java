@@ -49,7 +49,7 @@ public class ZhihuMemberDataProcessor implements DataProcessor<File, Document> {
         return followees.size() == 0 ? null : followees.get(0);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ZhihuConfiguration configuration = new ZhihuConfiguration();
         String folder = configuration.getMemberDataPath();
         DataProcessor<File, Document> processor = new ZhihuMemberDataProcessor();

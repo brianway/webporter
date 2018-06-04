@@ -1,6 +1,9 @@
 package com.brianway.webporter.collector;
 
 import com.brianway.webporter.collector.zhihu.ZhihuConfiguration;
+
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +25,7 @@ public class ZhihuConfigurationTest extends BaseTest {
     }
 
     @Test
-    public void testConfig() {
+    public void testConfig() throws Exception {
         String memberPath = baseDir + ZhihuConfiguration.SUBDIR_MEMBER;
         ZhihuConfiguration configuration = new ZhihuConfiguration();
         Assert.assertEquals(baseDir, configuration.getBaseDir());
@@ -31,7 +34,7 @@ public class ZhihuConfigurationTest extends BaseTest {
     }
 
     @Test
-    public void testConfigByPath() {
+    public void testConfigByPath() throws UnsupportedEncodingException {
         String followeePath = baseDir + ZhihuConfiguration.SUBDIR_FOLLOWEE;
         String path = rootDir + "another-config.json";
         ZhihuConfiguration configuration = new ZhihuConfiguration(path);
