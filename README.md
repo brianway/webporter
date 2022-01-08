@@ -32,11 +32,11 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 - 下载数据：去重导入 Elasticsearch 后大概有 60+ 万用户数据(目前没有遇到反爬限制)
 
-![索引状态图](http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%9C%A8ES%E7%B4%A2%E5%BC%95%E7%8A%B6%E6%80%81.jpg)
+![索引状态图](https://pic1.zhimg.com/80/v2-f28d4e4a9eb3e3407bec6b8f2cde2348_1440w.jpg)
 
 - 示例分析：通过聚合得到知乎用户 top 10 行业分布情况(1:男，0:女，-1:未知)
 
-![top 10 行业分布](http://7xph6d.com1.z0.glb.clouddn.com/webporter_%E7%9F%A5%E4%B9%8E-top10%E8%A1%8C%E4%B8%9A%E5%88%86%E5%B8%83.png)
+![top 10 行业分布](https://pic1.zhimg.com/80/v2-8b11f37c69db727cb3d8abbc978c4d5c_1440w.png)
 
 
 ## 仓库目录
@@ -100,8 +100,8 @@ webporter 的 github 地址：[https://github.com/brianway/webporter](https://gi
 
 如果您觉得该项目对您有帮助，请扫描下方二维码对我进行鼓励，以便我更好的维护和更新，谢谢支持！
 
-![支付宝](http://brianway.github.io/assets/images/alipay_small.png)
-![微信](http://brianway.github.io/assets/images/wechatpay_small.png)
+![支付宝](https://brianway.github.io/img/wechatpay_small.png)
+![微信](https://brianway.github.io/img/alipay_small.png)
 
 
 ## TODO
