@@ -7,7 +7,7 @@ import us.codecraft.webmagic.Site;
 public class SiteConfigurationTest {
 
     @Test
-    public void testGetConfiguredSite() {
+    public void testGetConfiguredSite() throws Exception {
         SiteConfiguration siteConfiguration = new SiteConfiguration();
         Site site = siteConfiguration.getSite();
         String key = "AAA";

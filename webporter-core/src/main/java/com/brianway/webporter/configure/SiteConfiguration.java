@@ -1,5 +1,7 @@
 package com.brianway.webporter.configure;
 
+import java.io.UnsupportedEncodingException;
+
 import com.alibaba.fastjson.JSON;
 import us.codecraft.webmagic.Site;
 
@@ -11,11 +13,11 @@ public class SiteConfiguration extends AbstractConfiguration {
         return site;
     }
 
-    public SiteConfiguration(String path) {
+    public SiteConfiguration(String path) throws UnsupportedEncodingException {
         super(path);
     }
 
-    public SiteConfiguration() {
+    public SiteConfiguration() throws Exception{
 
     }
 
@@ -23,7 +25,7 @@ public class SiteConfiguration extends AbstractConfiguration {
         site = JSON.parseObject(config, Site.class);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SiteConfiguration siteConfiguration = new SiteConfiguration();
         Site site = siteConfiguration.getSite();
         System.out.println(site);

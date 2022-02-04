@@ -11,7 +11,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class FolloweeUploader {
-    public static void upload() {
+    public static void upload() throws Exception {
         String index = "zhihu";
         String type = "followee";
         ZhihuConfiguration configuration = new ZhihuConfiguration();
@@ -31,7 +31,7 @@ public class FolloweeUploader {
         System.out.println(outPipeline.getBulkProcessor());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         FolloweeUploader.upload();
     }
 

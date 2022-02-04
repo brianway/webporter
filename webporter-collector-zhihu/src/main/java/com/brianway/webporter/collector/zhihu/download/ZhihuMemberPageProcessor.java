@@ -17,8 +17,12 @@ import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
  */
 public class ZhihuMemberPageProcessor implements PageProcessor {
 
-    private Site site = new ZhihuConfiguration().getSite();
+    private Site site;
 
+    public ZhihuMemberPageProcessor() throws Exception{
+    	new ZhihuConfiguration().getSite();
+    }
+    
     public void process(Page page) {
         page.putField(ZhihuPipeline.URL, page.getUrl());
         page.putField(ZhihuPipeline.RESPONSE, page.getRawText());
@@ -39,8 +43,9 @@ public class ZhihuMemberPageProcessor implements PageProcessor {
     /**
      * 根据提取的 url_token 逐个下载用户的完整信息
      * @param args 无须其他参数
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ZhihuConfiguration configuration = new ZhihuConfiguration();
         String pipelinePath = configuration.getMemberPath();
 

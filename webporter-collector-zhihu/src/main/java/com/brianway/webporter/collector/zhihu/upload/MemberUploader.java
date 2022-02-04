@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * step 3: 将用户数据导入 Elasticsearch
  */
 public class MemberUploader {
-    public static void upload() {
+    public static void upload() throws Exception {
         String index = "zhihu";
         String type = "member";
         ZhihuConfiguration configuration = new ZhihuConfiguration();
@@ -34,7 +34,7 @@ public class MemberUploader {
         System.out.println(outPipeline.getBulkProcessor());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         MemberUploader.upload();
     }
 }

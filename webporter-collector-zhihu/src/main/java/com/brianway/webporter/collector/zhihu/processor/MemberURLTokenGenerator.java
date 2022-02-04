@@ -33,14 +33,16 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
 
     public final static String URLTOKEN_FILENAME = "url_tokens";
 
-    private final static String DEFAULT_FOLDER = new ZhihuConfiguration().getFolloweeDataPath();
-    private final static String DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath() + URLTOKEN_FILENAME;
+    private static String DEFAULT_FOLDER;
+    private static String DEFAULT_PATH;
 
     private String folder;
     private String path;
 
-    public MemberURLTokenGenerator() {
+    public MemberURLTokenGenerator() throws Exception {
         this(DEFAULT_FOLDER, DEFAULT_PATH);
+        DEFAULT_FOLDER = new ZhihuConfiguration().getFolloweeDataPath();
+    	DEFAULT_PATH = new ZhihuConfiguration().getFolloweePath() + URLTOKEN_FILENAME;
     }
 
     /**
@@ -108,7 +110,7 @@ public class MemberURLTokenGenerator implements DataProcessor<File, String> {
         return new HashSet<>(tokens);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         MemberURLTokenGenerator generator = new MemberURLTokenGenerator();
         generator.generateURLTokens().stream()
                 .forEach(System.out::println);
